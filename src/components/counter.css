@@ -1,0 +1,11 @@
+.hold-container {
+  position: absolute;
+  pointer-events: none;
+  border: 3px solid paleturquoise;
+  background-color: palegoldenrod;
+  padding: 10px;
+}
+
+.hide {
+  display: none;
+}
