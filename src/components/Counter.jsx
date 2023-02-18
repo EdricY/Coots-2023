@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import "./counter.css";
+import { initEntries } from "../initEntries";
+import { FaBeer } from "react-icons/fa";
 
 function Counter() {
-  const [holdingItem, setHoldingItem] = useState({ icon: "", value: Math.floor(Math.random() * 10) });
-  const [gridEntries, setGridEntries] = useState([]);
+  const [holdingItem, setHoldingItem] = useState({ icon: "", value: null });
+  const [gridEntries, setGridEntries] = useState(initEntries);
 
   function handleSelectCell(item, index) {
     let copyGrid = [...gridEntries];
@@ -25,15 +27,6 @@ function Counter() {
     };
   }, [holdRef]);
 
-  useEffect(() => {
-    let x = [];
-    for (let index = 1; index <= 39; index++) {
-      x.push({ icon: "", value: Math.floor(Math.random() * 10) });
-    }
-    x.push({ icon: "", value: null });
-    setGridEntries(x);
-  }, []);
-
   return (
     <>
       <div className={`hold-container ${!holdingItem.value ? "hide" : ""}`} ref={holdRef}>
@@ -49,6 +42,7 @@ function Counter() {
             }}
           >
             {x.value}
+            {x.icon}
           </button>
         ))}
       </div>
