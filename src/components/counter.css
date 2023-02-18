@@ -1,11 +1,25 @@
 .hold-container {
   position: absolute;
   pointer-events: none;
-  border: 3px solid paleturquoise;
-  background-color: palegoldenrod;
+  border: 2px solid var(--yellow);
+  background-color: var(--pink);
   padding: 10px;
+  height: var(--space-s);
+  width: var(--space-s);
+  display: grid;
+  place-items: center;
+  grid-template-rows: 1fr min-content;
 }
 
 .hide {
   display: none;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), var(--space-s));
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: stretch;
 }

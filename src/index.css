@@ -12,7 +12,43 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --grid-cols: 8;
+
+  --red: #ca4b42;
+  --yellow: #f1dd7e;
+  --pink: #f7c7b3;
+  --lightblue: #c3d4e7;
+  --blue: #a4b9d4;
+  --lightgray: #b6beca;
+  --darkgray: #939aa6;
+
+  --space-3xs: clamp(0.5rem, calc(0.25rem + 1.25vmin), 1.25rem);
+  --space-2xs: clamp(0.94rem, calc(0.42rem + 2.6vmin), 2.5rem);
+  --space-xs: clamp(1.44rem, calc(0.67rem + 3.85vmin), 3.75rem);
+  --space-s: clamp(1.88rem, calc(0.83rem + 5.21vmin), 5rem);
+  --space-m: clamp(2.81rem, calc(1.25rem + 7.81vmin), 7.5rem);
+  --space-l: clamp(3.75rem, calc(1.67rem + 10.42vmin), 10rem);
+  --space-xl: clamp(5.63rem, calc(2.5rem + 15.63vmin), 15rem);
+  --space-2xl: clamp(7.5rem, calc(3.33rem + 20.83vmin), 20rem);
+  --space-3xl: clamp(11.25rem, calc(5rem + 31.25vmin), 30rem);
+
+  --step--2: clamp(0.65rem, calc(0.34rem + 1.58vw), 1.6rem);
+  --step--1: clamp(0.78rem, calc(0.38rem + 2.03vw), 2rem);
+  --step-0: clamp(0.94rem, calc(0.42rem + 2.6vw), 2.5rem);
+  --step-1: clamp(1.13rem, calc(0.46rem + 3.33vw), 3.13rem);
+  --step-2: clamp(1.35rem, calc(0.5rem + 4.26vw), 3.91rem);
+  --step-3: clamp(1.62rem, calc(0.53rem + 5.44vw), 4.88rem);
+  --step-4: clamp(1.94rem, calc(0.56rem + 6.93vw), 6.1rem);
+  --step-5: clamp(2.33rem, calc(0.57rem + 8.83vw), 7.63rem);
 }
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html,
 body {
   height: 100%;
@@ -40,5 +76,45 @@ body {
 }
 
 button {
-  all: unset;
+}
+
+.action-btn {
+  border: 1px solid var(--darkgray);
+  background-color: var(--lightblue);
+  color: black;
+  border-radius: 5px;
+  padding: 2px 5px;
+}
+.action-btn:hover,
+.action-btn:active {
+  background-color: var(--red);
+  color: white;
+  cursor: pointer;
+}
+.action-btn:disabled {
+  color: black;
+  background-color: var(--lightblue);
+  opacity: 0.7;
+}
+
+.cell {
+  padding: 0;
+  background-color: transparent;
+  width: var(--space-s);
+  height: var(--space-s);
+  border: 1px solid var(--lightblue);
+  cursor: pointer;
+  font-size: var(--step-2);
+  display: grid;
+  place-items: center;
+  color: var(--red);
+}
+
+.flex-1 {
+  flex: 1 1 auto;
+}
+
+.flex-col {
+  display: flex;
+  flex-flow: column;
 }

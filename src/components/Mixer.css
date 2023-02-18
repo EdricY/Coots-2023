@@ -1,0 +1,4 @@
+.mixer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, var(--space-s));
+}
