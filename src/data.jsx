@@ -27,13 +27,5 @@ export const gridStartData = [
   new Entity(),
   new Entity(),
   new Entity(),
-  new Entity(""),
-  new Entity(""),
-  new Entity(""),
-  new Entity(""),
-  new Entity(""),
-  new Entity(""),
-  new Entity(""),
-  new Entity(),
   new Entity(),
 ];

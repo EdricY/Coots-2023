@@ -1,0 +1,56 @@
+.meter-container {
+  position: absolute;
+  inset: var(--space-3xs);
+  left: unset;
+  width: var(--space-2xs);
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-end;
+  /* border: 1px solid var(--darkgray); */
+  box-shadow: black 2px 2px 10px 1px;
+}
+
+.anger-bg {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  background-color: var(--yellow);
+}
+
+.anger-meter {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  background-color: var(--red);
+  transition: height 0.5s;
+  transition-timing-function: ease-in;
+}
+
+.shake1 {
+  animation: shake 0.2s linear infinite;
+  --shakeAmt: 5%;
+  --shakeDeg: 0.2deg;
+}
+
+.shake2 {
+  animation: shake 0.2s linear infinite;
+  --shakeAmt: 10%;
+  --shakeDeg: 0.7deg;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0) rotate(var(--shakeDeg));
+  }
+  25% {
+    transform: translateX(var(--shakeAmt));
+  }
+  75% {
+    transform: translateX(calc(-1 * var(--shakeAmt))) rotate(calc(-1 * var(--shakeDeg)));
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

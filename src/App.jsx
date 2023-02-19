@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import "./App.css";
+import AngerMeter from "./components/AngerMeter";
 import Counter from "./components/Counter";
 import Mixer from "./components/Mixer";
 import Oven from "./components/Oven";
@@ -8,7 +9,6 @@ import Trash from "./Trash";
 
 function App() {
   const [heldItem, setHeldItem] = useState(new Entity());
-  // const [cursorObj, setCursorObj] = useState(0);
   const holdRef = useRef();
   useEffect(() => {
     if (!holdRef.current) return;
@@ -27,6 +27,20 @@ function App() {
     return heldItem;
   };
 
+  const [angerProgress, setAngerProgress] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => {
+      setAngerProgress((x) => x + 2);
+    }, 2000);
+    return () => {
+      clearInterval(t);
+    };
+  }, []);
+
+  const onAngerFull = () => {
+    setAngerProgress(0);
+  };
+
   return (
     <div className="App">
       <button>recipe</button>
@@ -37,9 +51,10 @@ function App() {
         <Mixer swapHeldItem={swapHeldItem} combineTime={2000} />
       </div>
       <Counter swapHeldItem={swapHeldItem} />
+      <AngerMeter progress={angerProgress} onFilled={onAngerFull} />
       <div className={`hold-container ${!heldItem.icon ? "hide" : ""}`} ref={holdRef}>
-        <div>{heldItem.icon}</div>
-        <div>{heldItem.value}</div>
+        <div className="hold-icon">{heldItem.icon}</div>
+        <div className="hold-value">{heldItem.value}</div>
       </div>
     </div>
   );

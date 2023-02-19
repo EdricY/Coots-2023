@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import "./counter.css";
+import "./Counter.css";
 import { gridStartData } from "../data";
 import { FaBeer } from "react-icons/fa";
 

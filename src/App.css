@@ -1,12 +1,76 @@
 .App {
   height: 100%;
+  position: relative;
+  padding: var(--space-3xs);
+
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.hold-container {
+  position: fixed;
+  pointer-events: none;
+  border: 2px solid var(--yellow);
+  background-color: var(--pink);
+  height: var(--space-s);
+  width: var(--space-s);
+
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  line-height: 0.8;
+}
+
+.hold-icon {
+  font-size: var(--step-0);
+}
+
+.hold-value {
+  font-size: var(--space-3xs);
+}
+
+.action-btn {
+  border: 1px solid var(--darkgray);
+  background-color: var(--lightblue);
+  color: black;
+  border-radius: 5px;
+  padding: 2px 5px;
+}
+.action-btn:hover,
+.action-btn:active {
+  background-color: var(--red);
+  color: white;
+  cursor: pointer;
+}
+.action-btn:disabled {
+  color: black;
+  background-color: var(--lightblue);
+  opacity: 0.7;
+}
+
+.cell {
+  padding: 0;
+  background-color: transparent;
+  width: var(--space-s);
+  height: var(--space-s);
+  border: 1px solid var(--lightblue);
+  cursor: pointer;
+  font-size: var(--step-2);
+  display: grid;
+  place-items: center;
+  color: var(--red);
 }
 
 .selected {
   background-color: peru;
 }
 .tools-container {
-  padding-inline: calc((100vmin - var(--grid-cols) * var(--space-s)) / 2);
+  padding-inline: calc((100vmin - var(--grid-cols) * var(--space-s)) / 2 - var(--space-3xs));
+  align-self: flex-start;
   display: flex;
   gap: var(--space-2xs);
   margin-bottom: var(--space-2xs);
