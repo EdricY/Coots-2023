@@ -1,14 +1,19 @@
 import { useState, useEffect, useRef } from "react";
+import { GiSpellBook } from "react-icons/gi";
 import "./App.css";
 import AngerMeter from "./components/AngerMeter";
 import Counter from "./components/Counter";
 import Mixer from "./components/Mixer";
+import OrderTerminal from "./components/OrderTerminal";
 import Oven from "./components/Oven";
+import Recipe from "./components/Recipe";
+import Serve from "./components/Serve";
 import Entity from "./Entity";
 import Trash from "./Trash";
 
 function App() {
   const [heldItem, setHeldItem] = useState(new Entity());
+  const [recipeOpen, setRecipeOpen] = useState(false);
   const holdRef = useRef();
   useEffect(() => {
     if (!holdRef.current) return;
@@ -37,18 +42,41 @@ function App() {
     };
   }, []);
 
+  const orderOptions = ["cookie", "cake", "pretzel"];
+  const [orderList, setOrderList] = useState([]);
+  useEffect(() => {
+    // TODO make order zoom in from the right
+    const t = setInterval(() => {
+      setOrderList((current) => [...current, new Entity(orderOptions[Math.floor(Math.random() * 3)])]);
+    }, 5000);
+    return () => {
+      clearInterval(t);
+    };
+  }, []);
+
   const onAngerFull = () => {
     setAngerProgress(0);
   };
 
   return (
     <div className="App">
-      <button>recipe</button>
+      <div className="ordersection">
+        <button
+          className="recipe-icon"
+          onClick={() => {
+            setRecipeOpen(true);
+          }}
+        >
+          <GiSpellBook />
+        </button>
+        <OrderTerminal orderList={orderList} />
+      </div>
       <div>CHEF COOTS</div>
       <div className="tools-container">
         <Trash swapHeldItem={swapHeldItem} trashTime={2000} />
         <Oven swapHeldItem={swapHeldItem} bakeTime={2000} />
         <Mixer swapHeldItem={swapHeldItem} combineTime={2000} />
+        <Serve swapHeldItem={swapHeldItem} serveTime={2000} orderList={orderList} setOrderList={setOrderList} />
       </div>
       <Counter swapHeldItem={swapHeldItem} />
       <AngerMeter progress={angerProgress} onFilled={onAngerFull} />
@@ -56,6 +84,7 @@ function App() {
         <div className="hold-icon">{heldItem.icon}</div>
         <div className="hold-value">{heldItem.value}</div>
       </div>
+      <Recipe isOpen={recipeOpen} setClosed={() => setRecipeOpen(false)} />
     </div>
   );
 }

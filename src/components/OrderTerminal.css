@@ -1,0 +1,17 @@
+.order-queue {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.order {
+  padding: 0;
+  background-color: var(--darkgray);
+  width: var(--space-s);
+  height: var(--space-s);
+  border: 1px solid var(--lightgray);
+  cursor: pointer;
+  font-size: var(--step-2);
+  display: grid;
+  place-items: center;
+  color: var(--yellow);
+}

@@ -1,0 +1,71 @@
+.dialog {
+  max-width: min(60ch, 100% - 1.6rem);
+  min-width: 25rem;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  max-height: calc(100vh - 3em);
+  /* background-color: var(--bg-color); */
+  color: black;
+  border: 0.3rem solid var(--text-color);
+  border-radius: 1rem;
+  height: min-content;
+}
+
+.dialog[open] {
+  animation: fade-in 300ms forwards;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dialog[open] {
+    animation: slide-up 500ms forwards, fade-in 300ms forwards;
+  }
+  @keyframes slide-up {
+    0% {
+      transform: translateY(10%);
+    }
+
+    100% {
+      transform: translateY(0%);
+    }
+  }
+}
+
+.dialog::backdrop {
+  background-color: black;
+  opacity: 0.7;
+}
+
+.dialog[closing] {
+  display: block;
+  pointer-events: none;
+  inset: 0;
+  animation: fade-out 200ms forwards;
+}
+
+.dialog-inner {
+  box-sizing: border-box;
+  position: relative;
+  padding: 2.4rem;
+  overflow: auto;
+  height: 100%;
+  max-height: var(--space-3xl);
+  min-height: fit-content;
+}
+
+@media screen and (max-width: 32em) {
+  .dialog-inner {
+    padding: 2.4rem 0.8rem;
+  }
+}
+
+.cooking-add {
+  width: 100%;
+  height: var(--space-m);
+}
+
+.swope {
+  background-color: var(--yellow);
+  font-size: larger;
+  text-align: center;
+}
