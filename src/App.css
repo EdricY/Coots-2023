@@ -2,7 +2,7 @@
   height: 100%;
   position: relative;
   padding: var(--space-3xs);
-  background: url("./assets/countertall.png");
+  background: url("./assets/counterWithMixer.png");
   background-repeat: no-repeat;
   background-size: contain;
   display: flex;
