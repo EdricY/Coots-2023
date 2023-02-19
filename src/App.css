@@ -29,6 +29,10 @@
   font-size: var(--step-0);
 }
 
+.icon-img {
+  width: var(--space-xs);
+}
+
 .hold-value {
   font-size: var(--space-3xs);
 }
