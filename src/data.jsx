@@ -22,7 +22,7 @@ export const gridStartData = [
   new Entity("sugar"),
   new Entity("flour"),
   new Entity("flour"),
-  new Entity("flour"),
+  null,
   new Entity("sugar"),
   new Entity("cake"),
   new Entity("cookie"),

@@ -51,6 +51,12 @@ export const mixerMap = new Map(
   })
 );
 
+export const combineMap = new Map(
+  Object.entries({
+    "flour--------": "sugar",
+  })
+);
+
 export default class Entity {
   icon = "";
   value = null;

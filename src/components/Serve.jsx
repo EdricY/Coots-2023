@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import Entity from "../Entity";
 
 export default function Serve({ swapHeldItem, serveTime, orderList, setOrderList }) {
-  const [item, setItem] = useState(new Entity());
+  const [item, setItem] = useState(null);
   const [serving, setServing] = useState(false);
   const progressRef = useRef();
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function Serve({ swapHeldItem, serveTime, orderList, setOrderList
       iterations: 1,
     });
     const timeout = setTimeout(() => {
-      setItem(new Entity());
+      setItem(null);
       //TODO: add animation for order dissapearing
       //TODO: remove first order
       setOrderList(orderList.filter((x) => x.value != item.value));
@@ -32,7 +32,7 @@ export default function Serve({ swapHeldItem, serveTime, orderList, setOrderList
     <div>
       Serve
       <button className="cell ovenSquare" disabled={serving} onClick={() => setItem(swapHeldItem(item))}>
-        {item.icon}
+        {item?.icon}
       </button>
       <div ref={progressRef} className="progress-bar"></div>
       <button className="action-btn" disabled={serving} onClick={() => setServing(true)}>

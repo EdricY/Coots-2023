@@ -12,7 +12,7 @@ import Entity from "./Entity";
 import Trash from "./Trash";
 
 function App() {
-  const [heldItem, setHeldItem] = useState(new Entity());
+  const [heldItem, setHeldItem] = useState(null);
   const [recipeOpen, setRecipeOpen] = useState(false);
   const holdRef = useRef();
   useEffect(() => {
@@ -21,9 +21,9 @@ function App() {
       holdRef.current.style.left = e.pageX + "px";
       holdRef.current.style.top = e.pageY + "px";
     };
-    document.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mousemove", onMouseMove);
     return () => {
-      document.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mousemove", onMouseMove);
     };
   }, [holdRef]);
 
@@ -63,7 +63,7 @@ function App() {
     <div className="App">
       <div className="ordersection">
         <button
-          className="recipe-icon"
+          className="recipe-btn"
           onClick={() => {
             setRecipeOpen(true);
           }}
@@ -76,14 +76,21 @@ function App() {
       <div className="tools-container">
         <Trash swapHeldItem={swapHeldItem} trashTime={2000} />
         <Oven swapHeldItem={swapHeldItem} bakeTime={2000} />
-        <Mixer swapHeldItem={swapHeldItem} combineTime={2000} />
+        <Mixer
+          swapHeldItem={swapHeldItem}
+          combineTime={1000}
+          mixTime={3000}
+        />
         <Serve swapHeldItem={swapHeldItem} serveTime={2000} orderList={orderList} setOrderList={setOrderList} />
       </div>
       <Counter swapHeldItem={swapHeldItem} />
       <AngerMeter progress={angerProgress} onFilled={onAngerFull} />
-      <div className={`hold-container ${!heldItem.icon ? "hide" : ""}`} ref={holdRef}>
-        <div className="hold-icon">{heldItem.icon}</div>
-        <div className="hold-value">{heldItem.value}</div>
+
+      <div className={`hold-container ${!heldItem?.icon ? "hide" : ""}`} ref={holdRef}>
+        {heldItem && <>
+          <div className="hold-icon">{heldItem.icon}</div>
+          <div className="hold-value">{heldItem.value}</div>
+        </>}
       </div>
       <Recipe isOpen={recipeOpen} setClosed={() => setRecipeOpen(false)} />
     </div>

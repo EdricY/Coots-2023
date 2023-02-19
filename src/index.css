@@ -79,7 +79,19 @@ body {
   flex: 1 1 auto;
 }
 
+.flex {
+  display: flex;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
 .flex-col {
   display: flex;
   flex-flow: column;
+}
+
+.mr-1 {
+  margin-right: var(--space-3xs);
 }
