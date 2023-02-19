@@ -69,3 +69,9 @@
   font-size: larger;
   text-align: center;
 }
+
+.loading {
+  margin: auto;
+  transform: rotate(360);
+  transition: transform 1s ease-in infinite;
+}

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { FaTimes } from "react-icons/fa";
+import { AiOutlineReload } from "react-icons/ai";
 import "./Recipe.css";
 
 export default function Recipe({ isOpen, setClosed }) {
@@ -38,10 +39,24 @@ export default function Recipe({ isOpen, setClosed }) {
           <div className="cooking-add swope">SWOPE Beday</div>
           <p>
             Once mixed this will create a creamed batter which when adding the flour, I find it best to position the
-            creamed batter to the right of the flour. Not the left mind you, the right side just give it that umf. With
-            twice as much flout as creamed batter
+            creamed batter really nestled underneath the flour. With twice as much flour as creamed batter.
           </p>
           <p>Cake.</p>
+          <p>Pretzel.</p>
+          <p>
+            Now the pretzel is maybe my easiest recipe which is why I put it last. Pretezls is just baked dough.
+            Remember that, when you boil down all baking you really get down to the fundementals and that fundemental
+            can really help you master the more complex stuff. Dough is very forgiving, and really you just need to make
+            sure that you layer your ingrediants evenly.
+          </p>
+          <div className="cooking-add loading">
+            <AiOutlineReload />
+          </div>
+          <p>
+            You can put the egg on top and all of the flour, that's fine. You can put the egg underneath all the flour,
+            you can even put the egg inbetween the flour, flour on top and flour on bottom. Go crazy explore. Once you
+            have the dough just go ahead and pop that in the oven. But don't over cook.
+          </p>
         </div>
       </div>
     </dialog>

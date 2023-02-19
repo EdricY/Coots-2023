@@ -46,6 +46,7 @@ function App() {
   const [orderList, setOrderList] = useState([]);
   useEffect(() => {
     // TODO make order zoom in from the right
+    // TODO make limit for orders
     const t = setInterval(() => {
       setOrderList((current) => [...current, new Entity(orderOptions[Math.floor(Math.random() * 3)])]);
     }, 5000);

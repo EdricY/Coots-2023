@@ -4,6 +4,7 @@
   padding: var(--space-3xs);
   background: url("./assets/countertall.png");
   background-repeat: no-repeat;
+  background-size: contain;
   display: flex;
   flex-flow: column;
   justify-content: flex-end;
