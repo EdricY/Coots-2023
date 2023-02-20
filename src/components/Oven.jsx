@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import Entity, { bakeMap } from "../Entity";
 
 export default function Oven({ swapHeldItem, bakeTime }) {
-  const [item, setItem] = useState(new Entity());
+  const [item, setItem] = useState(null);
   const [baking, setBaking] = useState(false);
   const [remainingTime, setRemainingTime] = useState(0);
   const progressRef = useRef();
@@ -32,7 +32,7 @@ export default function Oven({ swapHeldItem, bakeTime }) {
     <div>
       Oven
       <button className="cell ovenSquare" disabled={baking} onClick={() => setItem(swapHeldItem(item))}>
-        {item.icon}
+        {item?.icon}
       </button>
       <div ref={progressRef} className="progress-bar"></div>
       <button className="action-btn" onClick={() => setBaking(!baking)}>

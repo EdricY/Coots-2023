@@ -30,7 +30,7 @@
 
 .shake1 {
   animation: shake 0.2s linear infinite;
-  --shakeAmt: 5%;
+  --shakeAmt: 2%;
   --shakeDeg: 0.2deg;
 }
 

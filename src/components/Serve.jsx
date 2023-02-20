@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import Entity from "../Entity";
 
 export default function Serve({ swapHeldItem, serveTime, orderList, setOrderList }) {
-  const [item, setItem] = useState(new Entity());
+  const [item, setItem] = useState(null);
   const [serving, setServing] = useState(false);
   useEffect(() => {
     if (!serving) return;
@@ -19,7 +19,7 @@ export default function Serve({ swapHeldItem, serveTime, orderList, setOrderList
   return (
     <div>
       <button className="cell ovenSquare" disabled={serving} onClick={() => setItem(swapHeldItem(item))}>
-        {item.icon}
+        {item?.icon}
       </button>
       <button className="" disabled={serving} onClick={() => setServing(true)}>
         Serve

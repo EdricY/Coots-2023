@@ -23,7 +23,7 @@ function Counter({ swapHeldItem }) {
               handleSelectCell(x, index);
             }}
           >
-            {x.icon}
+            {x?.icon}
           </button>
         ))}
       </div>

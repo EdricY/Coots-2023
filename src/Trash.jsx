@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import Entity from "./Entity";
 
 export default function Trash({ swapHeldItem, trashTime }) {
-  const [item, setItem] = useState(new Entity());
+  const [item, setItem] = useState(null);
   const [disposing, setDisposing] = useState(false);
   const progressRef = useRef();
   useEffect(() => {
@@ -13,7 +13,7 @@ export default function Trash({ swapHeldItem, trashTime }) {
       iterations: 1,
     });
     const timeout = setTimeout(() => {
-      setItem(new Entity());
+      setItem(null);
       animation.cancel();
       setDisposing(false);
     }, trashTime);
@@ -27,7 +27,7 @@ export default function Trash({ swapHeldItem, trashTime }) {
     <div>
       Trash
       <button className="cell ovenSquare" disabled={disposing} onClick={() => setItem(swapHeldItem(item))}>
-        {item.icon}
+        {item?.icon}
       </button>
       <div ref={progressRef} className="progress-bar"></div>
       <button className="action-btn" disabled={disposing} onClick={() => setDisposing(true)}>
