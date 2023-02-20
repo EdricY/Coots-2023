@@ -72,6 +72,22 @@
 
 .loading {
   margin: auto;
-  transform: rotate(360);
-  transition: transform 1s ease-in infinite;
+  transform-origin: center center;
+  width: fit-content;
+  height: fit-content;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(3, var(--space-s));
 }

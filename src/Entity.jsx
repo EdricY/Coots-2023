@@ -9,6 +9,8 @@ import {
   GiButter,
   GiCookie,
   GiPretzel,
+  GiCorn,
+  GiBreadSlice,
 } from "react-icons/gi";
 import batter from "./assets/batter.png";
 import cookieDough from "./assets/biscuit.png";
@@ -19,6 +21,7 @@ const iconMap = new Map(
     flour: <GiFlour />,
     ash: <GiSquib />,
     dough: <GiDoughRoller />,
+    cornDough: <GiDoughRoller />,
     batter: <img className="icon-img" src={batter} />,
     sugar: <GiPowderBag />,
     cake: <GiStairsCake />,
@@ -27,6 +30,8 @@ const iconMap = new Map(
     cookie: <GiCookie />,
     cookieDough: <img className="icon-img" src={cookieDough} />,
     pretzel: <GiPretzel />,
+    corn: <GiCorn />,
+    cornBread: <GiBreadSlice />,
   })
 );
 
@@ -36,6 +41,7 @@ export const bakeMap = new Map(
     batter: "cake",
     cookieDough: "cookie",
     dough: "pretzel",
+    cornDough: "cornBread",
   })
 );
 
@@ -44,6 +50,7 @@ export const mixerMap = new Map(
     "egg-egg-egg-flour-flour-flour-flour-flour-flour": "dough",
     "flour-flour-flour-egg-egg-egg-flour-flour-flour": "dough",
     "flour-flour-flour-flour-flour-flour-egg-egg-egg": "dough",
+    "flour-flour-flour-corn-corn-corn-egg-egg-egg": "cornDough",
     "flour-flour-flour-egg-egg-egg-sugar-sugar-sugar": "batter",
     "sugar-sugar-sugar-egg-egg-egg-flour-flour-flour": "batter",
     "butter-butter-butter-sugar-sugar-sugar-egg-egg-egg": "batter",

@@ -69,6 +69,7 @@
   cursor: pointer;
   transform: scale(1);
   transition: transform 0.15s;
+  height: fit-content;
 }
 .recipe-icon:hover {
   background-color: transparent;
@@ -105,4 +106,19 @@
   height: var(--space-3xs);
   background-color: var(--red);
   width: 0;
+}
+
+/* temp? */
+.resource-getter {
+  display: flex;
+  gap: 5px;
+}
+.resource-getter .cell {
+  color: var(--red);
+  background-color: white;
+}
+
+.resource-getter .cell:hover {
+  background-color: gray;
+  color: var(--yellow);
 }

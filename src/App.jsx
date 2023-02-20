@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { GiSpellBook } from "react-icons/gi";
+import { FaEgg } from "react-icons/fa";
+import { GiButter, GiCorn, GiFlour, GiPowderBag, GiSpellBook } from "react-icons/gi";
 import "./App.css";
 import AngerMeter from "./components/AngerMeter";
 import Counter from "./components/Counter";
@@ -42,14 +43,18 @@ function App() {
     };
   }, []);
 
-  const orderOptions = ["cookie", "cake", "pretzel"];
+  const orderOptions = ["cookie", "cake", "pretzel", "cornBread"];
   const [orderList, setOrderList] = useState([]);
   useEffect(() => {
     // TODO make order zoom in from the right
-    // TODO make limit for orders
+    let orders = 0;
     const t = setInterval(() => {
-      setOrderList((current) => [...current, new Entity(orderOptions[Math.floor(Math.random() * 3)])]);
-    }, 5000);
+      setOrderList((current) => [...current, new Entity(orderOptions[Math.floor(Math.random() * 4)])]);
+      orders++;
+      if (orders >= 10) {
+        clearInterval(t);
+      }
+    }, 15000);
     return () => {
       clearInterval(t);
     };
@@ -59,6 +64,9 @@ function App() {
     setAngerProgress(0);
   };
 
+  function addResource(resource) {
+    swapHeldItem(resource);
+  }
   return (
     <div className="App">
       <div className="ordersection">
@@ -70,14 +78,33 @@ function App() {
         >
           <GiSpellBook />
         </button>
-        <OrderTerminal orderList={orderList} />
+        <div>
+          Orders
+          <OrderTerminal orderList={orderList} />
+          <Serve swapHeldItem={swapHeldItem} serveTime={2000} orderList={orderList} setOrderList={setOrderList} />
+        </div>
       </div>
-      <div>CHEF COOTS</div>
+      <div className="resource-getter">
+        <button className="cell" onClick={() => addResource(new Entity("egg"))}>
+          <FaEgg />
+        </button>
+        <button className="cell" onClick={() => addResource(new Entity("flour"))}>
+          <GiFlour />
+        </button>
+        <button className="cell" onClick={() => addResource(new Entity("sugar"))}>
+          <GiPowderBag />
+        </button>
+        <button className="cell" onClick={() => addResource(new Entity("butter"))}>
+          <GiButter />
+        </button>
+        <button className="cell" onClick={() => addResource(new Entity("corn"))}>
+          <GiCorn />
+        </button>
+      </div>
       <div className="tools-container">
         <Trash swapHeldItem={swapHeldItem} trashTime={2000} />
         <Oven swapHeldItem={swapHeldItem} bakeTime={2000} />
         <Mixer swapHeldItem={swapHeldItem} combineTime={2000} />
-        <Serve swapHeldItem={swapHeldItem} serveTime={2000} orderList={orderList} setOrderList={setOrderList} />
       </div>
       <Counter swapHeldItem={swapHeldItem} />
       <AngerMeter progress={angerProgress} onFilled={onAngerFull} />
