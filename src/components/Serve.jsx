@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import Entity from "../Entity";
 
-export default function Serve({ swapHeldItem, serveTime, orderList, setOrderList }) {
+export default function Serve({ swapHeldItem, orderList, setOrderList }) {
   const [item, setItem] = useState(null);
   const [serving, setServing] = useState(false);
   useEffect(() => {
@@ -11,8 +11,10 @@ export default function Serve({ swapHeldItem, serveTime, orderList, setOrderList
       setServing(false);
       return;
     }
-    setItem(new Entity());
-    setOrderList(orderList.filter((x) => x.value != item.value));
+    setItem(null);
+    let newList = [...orderList];
+    newList.shift();
+    setOrderList(newList);
     setServing(false);
   }, [serving]);
 

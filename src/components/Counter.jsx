@@ -1,11 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./Counter.css";
-import { gridStartData } from "../data";
-import { FaBeer } from "react-icons/fa";
 
-function Counter({ swapHeldItem }) {
-  const [gridEntries, setGridEntries] = useState(gridStartData);
-
+function Counter({ swapHeldItem, gridEntries, setGridEntries }) {
   function handleSelectCell(item, index) {
     let copyGrid = [...gridEntries];
     copyGrid[index] = swapHeldItem(copyGrid[index]);

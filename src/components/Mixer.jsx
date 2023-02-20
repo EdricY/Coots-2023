@@ -23,9 +23,11 @@ export default function Mixer({ swapHeldItem, combineTime, mixTime }) {
       easing: "ease-out",
       iterations: 1,
     });
-    const timeout = setTimeout(() => {
+    const interval = setInterval(() => {
       setMixing(false);
-      const mixStr = `${item1?.value ?? ""}-${item2?.value ?? ""}-${item3?.value ?? ""}-${item4?.value ?? ""}-${item5?.value ?? ""}-${item6?.value ?? ""}-${item7?.value ?? ""}-${item8?.value ?? ""}-${item9?.value ?? ""}`;
+      const mixStr = `${item1?.value ?? ""}-${item2?.value ?? ""}-${item3?.value ?? ""}-${item4?.value ?? ""}-${
+        item5?.value ?? ""
+      }-${item6?.value ?? ""}-${item7?.value ?? ""}-${item8?.value ?? ""}-${item9?.value ?? ""}`;
       console.log(mixStr);
       let mixedVal = mixerMap.get(mixStr);
       if (!mixedVal) mixedVal = "ash";
@@ -41,7 +43,8 @@ export default function Mixer({ swapHeldItem, combineTime, mixTime }) {
     }, mixTime);
 
     return () => {
-      clearTimeout(timeout);
+      clearInterval(interval);
+      animation.cancel();
     };
   }, [mixing]);
 
@@ -52,10 +55,13 @@ export default function Mixer({ swapHeldItem, combineTime, mixTime }) {
       easing: "ease-out",
       iterations: 1,
     });
-    const timeout = setTimeout(() => {
+    const interval = setInterval(() => {
       setCombining(false);
-      const combineStr = `${item1?.value ?? ""}-${item2?.value ?? ""}-${item3?.value ?? ""}-${item4?.value ?? ""}-${item5?.value ?? ""}-${item6?.value ?? ""}-${item7?.value ?? ""}-${item8?.value ?? ""}-${item9?.value ?? ""}`;
+      const combineStr = `${item1?.value ?? ""}-${item2?.value ?? ""}-${item3?.value ?? ""}-${item4?.value ?? ""}-${
+        item5?.value ?? ""
+      }-${item6?.value ?? ""}-${item7?.value ?? ""}-${item8?.value ?? ""}-${item9?.value ?? ""}`;
       console.log(combineStr);
+      if (combineStr.includes("ash")) return;
       let combinedVal = combineMap.get(combineStr);
       if (!combinedVal) {
         return;
@@ -72,8 +78,12 @@ export default function Mixer({ swapHeldItem, combineTime, mixTime }) {
     }, combineTime);
 
     return () => {
-      clearTimeout(timeout);
+      clearInterval(interval);
+      animation.cancel();
     };
+    // return () => {
+    //   clearTimeout(timeout);
+    // };
   }, [combining]);
 
   const inUse = mixing || combining;
@@ -111,11 +121,11 @@ export default function Mixer({ swapHeldItem, combineTime, mixTime }) {
       </div>
       <div ref={progressRef} className="progress-bar"></div>
       <div className="flex justify-between">
-        <button className="action-btn mr-1" disabled={inUse} onClick={() => setMixing(true)}>
-          Mix
+        <button className="action-btn mr-1" onClick={() => setMixing(!mixing)}>
+          {mixing ? "Stop" : "Mix"}
         </button>
-        <button className="action-btn" disabled={inUse} onClick={() => setCombining(true)}>
-          Combine
+        <button className="action-btn" onClick={() => setCombining(!combining)}>
+          {combining ? "Stop" : "Combine"}
         </button>
       </div>
     </div>

@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import "./AngerMeter.css";
 
-export default function AngerMeter({ progress, onFilled }) {
+export default function AngerMeter({ progress, onFilled, rage }) {
   useEffect(() => {
     if (progress > 100) {
       console.log("anger full");
+      rage();
       onFilled();
     }
   }, [progress]);
