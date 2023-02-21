@@ -63,6 +63,7 @@ export default function Mixer({ swapHeldItem, combineTime, mixTime }) {
       console.log(combineStr);
       if (combineStr.includes("ash")) return;
       let combinedVal = combineMap.get(combineStr);
+      if (combinedVal == "happy coots") console.log("coots is pleased"); //TODO decrese coots meter
       if (!combinedVal) {
         return;
       }

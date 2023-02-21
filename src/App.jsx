@@ -13,13 +13,16 @@ import Entity from "./Entity";
 import Trash from "./Trash";
 import Dice from "./Dice";
 import { gridStartData } from "./data";
+import Menu from "./Menu";
 
 function App() {
   const [heldItem, setHeldItem] = useState(null);
   const [recipeOpen, setRecipeOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(true);
   const [gridEntries, setGridEntries] = useState(gridStartData);
   const [rollStart, setRollStart] = useState(Date.now());
   const [faceIdx, setFaceIdx] = useState(0);
+  const [level, setLevel] = useState(0);
 
   const holdRef = useRef();
   useEffect(() => {
@@ -41,6 +44,7 @@ function App() {
 
   const [angerProgress, setAngerProgress] = useState(0);
   useEffect(() => {
+    if (level < 1) return;
     const t = setInterval(() => {
       setAngerProgress((x) => x + 2);
     }, 2000);
@@ -49,18 +53,28 @@ function App() {
     };
   }, []);
 
-  const orderOptions = ["cookie", "cake", "pretzel", "cornBread"];
-  const [orderList, setOrderList] = useState([new Entity(orderOptions[Math.floor(Math.random() * 4)])]);
+  const orderOptions = [
+    { level: 0, options: ["pretzel"] },
+    { level: 1, options: ["pretzel", "cornBread"] },
+    { level: 2, options: ["cake", "pretzel", "cornBread"] },
+    { level: 3, options: ["cookie", "cake", "pretzel", "cornBread"] },
+  ];
+  const [orderList, setOrderList] = useState([
+    new Entity(orderOptions[level].options[Math.floor(Math.random() * orderOptions[level].options.length)]),
+  ]);
   useEffect(() => {
     // TODO make order zoom in from the right?
     let orders = 0;
+    let numOfOrders = (level + 2) * 2; // TODO tweak the order numbers
     const t = setInterval(() => {
-      setOrderList((current) => [...current, new Entity(orderOptions[Math.floor(Math.random() * 4)])]);
+      setOrderList((current) => [
+        ...current,
+        new Entity(orderOptions[level].options[Math.floor(Math.random() * orderOptions[level].options.length)]),
+      ]);
       orders++;
-      if (orders >= 10) {
+      if (orders >= numOfOrders) {
         clearInterval(t);
       }
-      // TODO restart interval when orders go back down from 10 to 9
     }, 15000);
     return () => {
       clearInterval(t);
@@ -75,7 +89,7 @@ function App() {
     let copyGrid = [...gridEntries];
     if (copyGrid.filter((x) => x === null).length == 0) return;
     let randoslot = 0;
-    //check if grid is full
+    //checking if grid is full
     while (copyGrid[randoslot]) {
       randoslot = Math.floor(Math.random() * copyGrid.length);
     }
@@ -101,6 +115,7 @@ function App() {
   }
   return (
     <div className="App">
+      <Menu isOpen={menuOpen} setClosed={() => setMenuOpen(false)} level={level} />
       <div className="ordersection">
         <button
           className="recipe-btn"
@@ -137,7 +152,7 @@ function App() {
           <GiFeline />
         </button>
       </div>
-      <Dice faceIdx={faceIdx} rollStart={rollStart} />
+      <Dice faceIdx={faceIdx} rollStart={rollStart} level={level} />
       <button
         onClick={() => {
           setRollStart(Date.now());

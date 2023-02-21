@@ -61,6 +61,12 @@
   pointer-events: none;
 }
 
+.close-btn {
+  border: none;
+  background: inherit;
+  cursor: pointer;
+}
+
 .ordersection {
   margin-right: auto;
   margin-bottom: auto;
@@ -91,6 +97,18 @@
   place-items: center;
   color: black;
   font-size: var(--step-2);
+}
+
+.cell.gray {
+  color: var(--darkergray);
+}
+
+.cell.pink {
+  color: var(--red);
+}
+
+.cell.yellow {
+  color: var(--yellow);
 }
 
 .cell .icon-img {

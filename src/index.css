@@ -97,15 +97,3 @@ body {
 .mr-1 {
   margin-right: var(--space-3xs);
 }
-
-.cell.gray {
-  color: var(--darkergray);
-}
-
-.cell.pink {
-  color: var(--red);
-}
-
-.cell.yellow {
-  color: var(--yellow);
-}

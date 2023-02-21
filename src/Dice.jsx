@@ -4,12 +4,13 @@ import cookieDough from "./assets/biscuit.png";
 
 const imgs = {};
 
-export default function DiceElement({ faceIdx, rollStart }) {
+export default function DiceElement({ faceIdx, rollStart, level }) {
+  // TODO: level determines which faces the dice has
   const ref = useRef();
   const [x, setX] = useState();
   useEffect(() => {
     if (!ref.current) return;
-
+    console.log(level);
     const dice = new Dice(
       ref.current,
       [
