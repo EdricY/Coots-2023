@@ -11,12 +11,15 @@ import Recipe from "./components/Recipe";
 import Serve from "./components/Serve";
 import Entity from "./Entity";
 import Trash from "./Trash";
+import Dice from "./Dice";
 import { gridStartData } from "./data";
 
 function App() {
   const [heldItem, setHeldItem] = useState(null);
   const [recipeOpen, setRecipeOpen] = useState(false);
   const [gridEntries, setGridEntries] = useState(gridStartData);
+  const [rollStart, setRollStart] = useState(Date.now());
+  const [faceIdx, setFaceIdx] = useState(0);
 
   const holdRef = useRef();
   useEffect(() => {
@@ -57,6 +60,7 @@ function App() {
       if (orders >= 10) {
         clearInterval(t);
       }
+      // TODO restart interval when orders go back down from 10 to 9
     }, 15000);
     return () => {
       clearInterval(t);
@@ -77,18 +81,19 @@ function App() {
     }
 
     if (!copyGrid[randoslot]) {
-      //maybe add new class here?
+      //TODO maybe add new class here?
       copyGrid[randoslot] = resource;
       setGridEntries(copyGrid);
     }
   }
+
   const rowStarts = [0, 8, 16];
   function rage() {
     let randomRow = rowStarts[Math.floor(Math.random() * 3)];
-    console.log(randomRow);
     let copyGrid = [...gridEntries];
     for (let idx = 0; idx < copyGrid.length; idx++) {
       if (idx >= randomRow && idx <= randomRow + 7) {
+        // TODO add animation here for resources disappearing
         copyGrid[idx] = null;
       }
     }
@@ -111,6 +116,7 @@ function App() {
           <Serve swapHeldItem={swapHeldItem} orderList={orderList} setOrderList={setOrderList} />
         </div>
       </div>
+
       <div className="resource-getter">
         <button className="cell" onClick={() => addResource(new Entity("egg"))}>
           <FaEgg />
@@ -128,6 +134,15 @@ function App() {
           <GiCorn />
         </button>
       </div>
+      <Dice faceIdx={faceIdx} rollStart={rollStart} />
+      <button
+        onClick={() => {
+          setRollStart(Date.now());
+          setFaceIdx(Math.floor(Math.random() * 6));
+        }}
+      >
+        roll
+      </button>
       <div className="tools-container">
         <Trash swapHeldItem={swapHeldItem} trashTime={2000} />
         <Oven swapHeldItem={swapHeldItem} bakeTime={2000} />

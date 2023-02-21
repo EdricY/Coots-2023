@@ -1,4 +1,5 @@
 import { FaEgg } from "react-icons/fa";
+import { HiCake } from "react-icons/hi";
 import {
   GiFlour,
   GiSquib,
@@ -32,6 +33,7 @@ const iconMap = new Map(
     pretzel: <GiPretzel />,
     corn: <GiCorn />,
     cornBread: <GiBreadSlice />,
+    "birthday cake": <HiCake />,
   })
 );
 
@@ -61,6 +63,7 @@ export const mixerMap = new Map(
 export const combineMap = new Map(
   Object.entries({
     "flour--------": "sugar",
+    "cake-candle------": "birthday cake",
   })
 );
 

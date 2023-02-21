@@ -22,6 +22,7 @@
   --blue: #a4b9d4;
   --lightgray: #b6beca;
   --darkgray: #939aa6;
+  --cyan: #93c9c4;
 
   --space-3xs: clamp(0.5rem, calc(0.25rem + 1.25vmin), 1.25rem);
   --space-2xs: clamp(0.94rem, calc(0.42rem + 2.6vmin), 2.5rem);

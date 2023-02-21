@@ -2,3 +2,8 @@
   display: grid;
   grid-template-columns: repeat(3, var(--space-s));
 }
+
+.mixer-grid .cell {
+  background-color: var(--cyan);
+  border: 1px solid white;
+}
