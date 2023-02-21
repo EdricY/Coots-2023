@@ -220,7 +220,26 @@ export default function Recipe({ isOpen, setClosed }) {
                 creamed batter really nestled underneath the flour. With twice as much flour as creamed batter.
               </p>
               <p>Cake.</p>
+              <p>
+                This recipe is a surefire staple in this cookbook. Don't worry it will still challenge you. You want to
+                make your batter with flour sugar and egg. Making sure to separate the flour and sugar in the mixer with
+                a layer of egg in the middle.
+              </p>
+              <p>
+                And because the sugar is heavier you'll want that on the bottom. This will make the batter. The batter
+                can then be baked in the over to produce cake. If they want a birthday cake make sure you add a candle
+              </p>
               <p>Corn Bread.</p>
+              <div className="cooking-add"></div>
+              <p>
+                Corn bread is a huge crowdpleaser, you're friends will be asking you to bring it to super bowl parties,
+                work events, even weddings. The corn in the corn bread is really the star of the show,{" "}
+              </p>
+              <div className="cooking-add"></div>
+              <p>
+                which is why you want to fill the center row with it, so everyone will know that it is corn bread, and
+                so the corn flavor can seep into the egg below and the flour above.
+              </p>
               <p>Pretzel.</p>
               <p>
                 Now the pretzel is maybe my easiest recipe which is why I put it last. Pretezls is just baked dough.

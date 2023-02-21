@@ -20,7 +20,11 @@ export default function Serve({ swapHeldItem, orderList, setOrderList }) {
 
   return (
     <div>
-      <button className="cell ovenSquare" disabled={serving} onClick={() => setItem(swapHeldItem(item))}>
+      <button
+        className={`cell ovenSquare ${item?.color}`}
+        disabled={serving}
+        onClick={() => setItem(swapHeldItem(item))}
+      >
         {item?.icon}
       </button>
       <button className="" disabled={serving} onClick={() => setServing(true)}>

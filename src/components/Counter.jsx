@@ -13,7 +13,7 @@ function Counter({ swapHeldItem, gridEntries, setGridEntries }) {
       <div className="grid-container">
         {gridEntries.map((x, index) => (
           <button
-            className="cell"
+            className={`cell ${x?.color}`}
             key={index}
             onClick={() => {
               handleSelectCell(x, index);

@@ -91,31 +91,31 @@ export default function Mixer({ swapHeldItem, combineTime, mixTime }) {
     <div>
       Mixer
       <div className="mixer-grid">
-        <button className="cell" disabled={inUse} onClick={() => setItem1(swapHeldItem(item1))}>
+        <button className={`cell ${item1?.color}`} disabled={inUse} onClick={() => setItem1(swapHeldItem(item1))}>
           {item1?.icon}
         </button>
-        <button className="cell" disabled={inUse} onClick={() => setItem2(swapHeldItem(item2))}>
+        <button className={`cell ${item2?.color}`} disabled={inUse} onClick={() => setItem2(swapHeldItem(item2))}>
           {item2?.icon}
         </button>
-        <button className="cell" disabled={inUse} onClick={() => setItem3(swapHeldItem(item3))}>
+        <button className={`cell ${item3?.color}`} disabled={inUse} onClick={() => setItem3(swapHeldItem(item3))}>
           {item3?.icon}
         </button>
-        <button className="cell" disabled={inUse} onClick={() => setItem4(swapHeldItem(item4))}>
+        <button className={`cell ${item4?.color}`} disabled={inUse} onClick={() => setItem4(swapHeldItem(item4))}>
           {item4?.icon}
         </button>
-        <button className="cell" disabled={inUse} onClick={() => setItem5(swapHeldItem(item5))}>
+        <button className={`cell ${item5?.color}`} disabled={inUse} onClick={() => setItem5(swapHeldItem(item5))}>
           {item5?.icon}
         </button>
-        <button className="cell" disabled={inUse} onClick={() => setItem6(swapHeldItem(item6))}>
+        <button className={`cell ${item6?.color}`} disabled={inUse} onClick={() => setItem6(swapHeldItem(item6))}>
           {item6?.icon}
         </button>
-        <button className="cell" disabled={inUse} onClick={() => setItem7(swapHeldItem(item7))}>
+        <button className={`cell ${item7?.color}`} disabled={inUse} onClick={() => setItem7(swapHeldItem(item7))}>
           {item7?.icon}
         </button>
-        <button className="cell" disabled={inUse} onClick={() => setItem8(swapHeldItem(item8))}>
+        <button className={`cell ${item8?.color}`} disabled={inUse} onClick={() => setItem8(swapHeldItem(item8))}>
           {item8?.icon}
         </button>
-        <button className="cell" disabled={inUse} onClick={() => setItem9(swapHeldItem(item9))}>
+        <button className={`cell ${item9?.color}`} disabled={inUse} onClick={() => setItem9(swapHeldItem(item9))}>
           {item9?.icon}
         </button>
       </div>

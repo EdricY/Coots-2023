@@ -22,6 +22,7 @@
   --blue: #a4b9d4;
   --lightgray: #b6beca;
   --darkgray: #939aa6;
+  --darkergray: #6d6d6d;
   --cyan: #93c9c4;
 
   --space-3xs: clamp(0.5rem, calc(0.25rem + 1.25vmin), 1.25rem);
@@ -95,4 +96,16 @@ body {
 
 .mr-1 {
   margin-right: var(--space-3xs);
+}
+
+.cell.gray {
+  color: var(--darkergray);
+}
+
+.cell.pink {
+  color: var(--red);
+}
+
+.cell.yellow {
+  color: var(--yellow);
 }

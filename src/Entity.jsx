@@ -12,6 +12,8 @@ import {
   GiPretzel,
   GiCorn,
   GiBreadSlice,
+  GiHollowCat,
+  GiFeline,
 } from "react-icons/gi";
 import batter from "./assets/batter.png";
 import cookieDough from "./assets/biscuit.png";
@@ -34,6 +36,8 @@ const iconMap = new Map(
     corn: <GiCorn />,
     cornBread: <GiBreadSlice />,
     "birthday cake": <HiCake />,
+    "happy coots": <GiHollowCat />,
+    cat: <GiFeline />,
   })
 );
 
@@ -64,14 +68,28 @@ export const combineMap = new Map(
   Object.entries({
     "flour--------": "sugar",
     "cake-candle------": "birthday cake",
+    "cat-cat-cat------": "happy coots",
   })
 );
+const ingredients = ["flour", "egg", "sugar", "butter", "corn"];
+const inbetween = ["batter", "dough", "cornDough", "cookieDough"];
+const final = ["cake", "cookie", "pretzel", "cornBread"];
 
 export default class Entity {
   icon = "";
   value = null;
+  color = "";
   constructor(value) {
     this.icon = iconMap.get(value);
     this.value = value;
+    if (ingredients.includes(value)) {
+      this.color = "gray";
+    } else if (inbetween.includes(value)) {
+      this.color = "pink";
+    } else if (final.includes(value)) {
+      this.color = "yellow";
+    } else {
+      this.color = "";
+    }
   }
 }

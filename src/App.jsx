@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { FaEgg } from "react-icons/fa";
-import { GiButter, GiCorn, GiFlour, GiPowderBag, GiSpellBook } from "react-icons/gi";
+import { GiButter, GiCorn, GiFeline, GiFlour, GiPowderBag, GiSpellBook } from "react-icons/gi";
 import "./App.css";
 import AngerMeter from "./components/AngerMeter";
 import Counter from "./components/Counter";
@@ -132,6 +132,9 @@ function App() {
         </button>
         <button className="cell" onClick={() => addResource(new Entity("corn"))}>
           <GiCorn />
+        </button>
+        <button className="cell" onClick={() => addResource(new Entity("cat"))}>
+          <GiFeline />
         </button>
       </div>
       <Dice faceIdx={faceIdx} rollStart={rollStart} />

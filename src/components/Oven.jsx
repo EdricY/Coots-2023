@@ -31,7 +31,11 @@ export default function Oven({ swapHeldItem, bakeTime }) {
   return (
     <div>
       Oven
-      <button className="cell ovenSquare" disabled={baking} onClick={() => setItem(swapHeldItem(item))}>
+      <button
+        className={`cell ovenSquare ${item?.color}`}
+        disabled={baking}
+        onClick={() => setItem(swapHeldItem(item))}
+      >
         {item?.icon}
       </button>
       <div ref={progressRef} className="progress-bar"></div>
