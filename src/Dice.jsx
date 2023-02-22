@@ -1,7 +1,9 @@
 import * as twgl from "twgl.js";
 import { useEffect, useRef, useState } from "react";
 import cookieDough from "./assets/biscuit.png";
-
+// TODO : this works but needs more work
+const cookieDoughImg = new Image();
+cookieDoughImg.src = cookieDough;
 const imgs = {};
 
 export default function DiceElement({ faceIdx, rollStart, level }) {
@@ -11,16 +13,10 @@ export default function DiceElement({ faceIdx, rollStart, level }) {
   useEffect(() => {
     if (!ref.current) return;
     console.log(level);
+
     const dice = new Dice(
       ref.current,
-      [
-        new Image(cookieDough),
-        new Image(cookieDough),
-        new Image(cookieDough),
-        new Image(cookieDough),
-        new Image(cookieDough),
-        new Image(cookieDough),
-      ],
+      [cookieDoughImg, cookieDoughImg, cookieDoughImg, cookieDoughImg, "", ""],
       ["green", "blue", "red", "yellow", "cyan", "magenta"]
     );
     dice.roll(1, 2000, 0.01 + Math.random() / 1000);
