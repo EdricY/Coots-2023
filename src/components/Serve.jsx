@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import Entity from "../Entity";
 
-export default function Serve({ swapHeldItem, orderList, setOrderList }) {
+export default function Serve({ swapHeldItem, orderList, setOrderList, setMenuOpen }) {
   const [item, setItem] = useState(null);
   const [serving, setServing] = useState(false);
   useEffect(() => {
@@ -15,6 +15,12 @@ export default function Serve({ swapHeldItem, orderList, setOrderList }) {
     let newList = [...orderList];
     newList.shift();
     setOrderList(newList);
+    if (newList.length == 0) {
+      console.log("yay! fulled all the orders");
+      // TODO need to make sure this happens at the end of all the orders not just if you are on top of things
+      // maybe replace this with a finish level function instead
+      setMenuOpen(true);
+    }
     setServing(false);
   }, [serving]);
 

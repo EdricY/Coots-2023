@@ -23,7 +23,7 @@ export default function Mixer({ swapHeldItem, combineTime, mixTime }) {
       easing: "ease-out",
       iterations: 1,
     });
-    const interval = setInterval(() => {
+    const timeout = setTimeout(() => {
       setMixing(false);
       const mixStr = `${item1?.value ?? ""}-${item2?.value ?? ""}-${item3?.value ?? ""}-${item4?.value ?? ""}-${
         item5?.value ?? ""
@@ -43,7 +43,7 @@ export default function Mixer({ swapHeldItem, combineTime, mixTime }) {
     }, mixTime);
 
     return () => {
-      clearInterval(interval);
+      clearTimeout(timeout);
       animation.cancel();
     };
   }, [mixing]);
@@ -55,7 +55,7 @@ export default function Mixer({ swapHeldItem, combineTime, mixTime }) {
       easing: "ease-out",
       iterations: 1,
     });
-    const interval = setInterval(() => {
+    const timeout = setTimeout(() => {
       setCombining(false);
       const combineStr = `${item1?.value ?? ""}-${item2?.value ?? ""}-${item3?.value ?? ""}-${item4?.value ?? ""}-${
         item5?.value ?? ""
@@ -79,12 +79,9 @@ export default function Mixer({ swapHeldItem, combineTime, mixTime }) {
     }, combineTime);
 
     return () => {
-      clearInterval(interval);
+      clearTimeout(timeout);
       animation.cancel();
     };
-    // return () => {
-    //   clearTimeout(timeout);
-    // };
   }, [combining]);
 
   const inUse = mixing || combining;

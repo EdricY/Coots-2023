@@ -128,7 +128,12 @@ function App() {
         <div>
           Orders
           <OrderTerminal orderList={orderList} />
-          <Serve swapHeldItem={swapHeldItem} orderList={orderList} setOrderList={setOrderList} />
+          <Serve
+            swapHeldItem={swapHeldItem}
+            orderList={orderList}
+            setOrderList={setOrderList}
+            setMenuOpen={setMenuOpen}
+          />
         </div>
       </div>
 

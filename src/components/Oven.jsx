@@ -15,11 +15,13 @@ export default function Oven({ swapHeldItem, bakeTime }) {
       iterations: Infinity,
     });
     const interval = setInterval(() => {
-      if (!item.value) return;
-      if (item.value === "ash") return;
-      let bakedItem = bakeMap.get(item.value);
-      if (!bakedItem) bakedItem = "ash";
-      setItem(new Entity(bakedItem));
+      setItem((item) => {
+        if (!item?.value) return item;
+        if (item.value === "ash") return item;
+        let bakedItem = bakeMap.get(item.value);
+        if (!bakedItem) bakedItem = "ash";
+        return new Entity(bakedItem);
+      });
     }, bakeTime);
 
     return () => {
