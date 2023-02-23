@@ -1,5 +1,5 @@
 .ovenSquare {
-  width: var(--space-s);
+  /* width: var(--space-s);
   height: var(--space-s);
-  border: 1px solid var(--darkgray);
+  border: 1px solid var(--darkgray); */
 }

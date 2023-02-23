@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import "./AngerMeter.css";
 
-export default function AngerMeter({ progress, onFilled, rage }) {
+export default function AngerMeter({ progress, onFilled }) {
   useEffect(() => {
-    if (progress > 100) {
-      console.log("anger full");
-      rage();
-      onFilled();
+    if (progress >= 100) {
+      const t = setTimeout(() => { onFilled() }, 500)
+      return () => clearInterval(t);
     }
   }, [progress]);
 

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { FaEgg } from "react-icons/fa";
 import { HiCake } from "react-icons/hi";
 import {
@@ -20,7 +21,7 @@ import cookieDough from "./assets/biscuit.png";
 
 const iconMap = new Map(
   Object.entries({
-    egg: <FaEgg />,
+    egg: <FaEgg color="red"/>,
     flour: <GiFlour />,
     ash: <GiSquib />,
     dough: <GiDoughRoller />,
@@ -43,7 +44,6 @@ const iconMap = new Map(
 
 export const bakeMap = new Map(
   Object.entries({
-    flour: "dough",
     batter: "cake",
     cookieDough: "cookie",
     dough: "pretzel",
@@ -76,20 +76,27 @@ const inbetween = ["batter", "dough", "cornDough", "cookieDough"];
 const final = ["cake", "cookie", "pretzel", "cornBread"];
 
 export default class Entity {
-  icon = "";
+  icon = null;
   value = null;
-  color = "";
+  fresh = true;
   constructor(value) {
-    this.icon = iconMap.get(value);
     this.value = value;
-    if (ingredients.includes(value)) {
-      this.color = "gray";
-    } else if (inbetween.includes(value)) {
-      this.color = "pink";
-    } else if (final.includes(value)) {
-      this.color = "yellow";
-    } else {
-      this.color = "";
-    }
   }
+
+  unfresh() {
+    this.fresh = false;
+  }
+}
+
+
+
+export function EntityIcon({ entity }) {
+  if (!entity?.value) return <></>;
+
+  const icon = iconMap.get(entity.value);
+  return <div
+    className={`flex items-center ${entity.fresh ? "fresh" : ""}`}
+  >
+    {icon}
+  </div>;
 }

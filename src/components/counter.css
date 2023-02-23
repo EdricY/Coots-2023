@@ -9,4 +9,10 @@
   align-content: center;
   justify-content: center;
   justify-items: stretch;
+  border: 1px solid var(--darkgray);
+}
+
+.grid-container .cell {
+  border: 1px solid var(--darkgray);
+
 }

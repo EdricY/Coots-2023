@@ -9,7 +9,7 @@ import OrderTerminal from "./components/OrderTerminal";
 import Oven from "./components/Oven";
 import Recipe from "./components/Recipe";
 import Serve from "./components/Serve";
-import Entity from "./Entity";
+import Entity, { EntityIcon } from "./Entity";
 import Trash from "./Trash";
 import Dice from "./Dice";
 import { gridStartData } from "./data";
@@ -38,20 +38,23 @@ function App() {
   }, [holdRef]);
 
   const swapHeldItem = (x) => {
+    if (x) x.fresh = false;
+    if (heldItem) heldItem.fresh = false;
     setHeldItem(x);
     return heldItem;
   };
 
   const [angerProgress, setAngerProgress] = useState(0);
+  const addAnger = (amt) => setAngerProgress(x => Math.min(100, x+amt));
   useEffect(() => {
     if (level < 1) return;
     const t = setInterval(() => {
-      setAngerProgress((x) => x + 2);
+      addAnger(2);
     }, 2000);
     return () => {
       clearInterval(t);
     };
-  }, []);
+  }, [level]);
 
   const orderOptions = [
     { level: 0, options: ["pretzel"] },
@@ -83,6 +86,7 @@ function App() {
 
   const onAngerFull = () => {
     setAngerProgress(0);
+    rage();
   };
 
   function addResource(resource) {
@@ -113,6 +117,7 @@ function App() {
     }
     setGridEntries(copyGrid);
   }
+
   return (
     <div className="App">
       <Menu isOpen={menuOpen} setClosed={() => setMenuOpen(false)} level={level} />
@@ -132,7 +137,6 @@ function App() {
             swapHeldItem={swapHeldItem}
             orderList={orderList}
             setOrderList={setOrderList}
-            setMenuOpen={setMenuOpen}
           />
         </div>
       </div>
@@ -162,6 +166,7 @@ function App() {
         onClick={() => {
           setRollStart(Date.now());
           setFaceIdx(Math.floor(Math.random() * 6));
+          addAnger(Math.random() * 20)
         }}
       >
         roll
@@ -172,12 +177,12 @@ function App() {
         <Mixer swapHeldItem={swapHeldItem} combineTime={1000} mixTime={3000} />
       </div>
       <Counter swapHeldItem={swapHeldItem} gridEntries={gridEntries} setGridEntries={setGridEntries} />
-      <AngerMeter progress={angerProgress} onFilled={onAngerFull} rage={rage} />
+      <AngerMeter progress={angerProgress} onFilled={onAngerFull} />
 
-      <div className={`hold-container ${!heldItem?.icon ? "hide" : ""}`} ref={holdRef}>
+      <div className={`hold-container ${!heldItem?.value ? "hide" : ""}`} ref={holdRef}>
         {heldItem && (
           <>
-            <div className="hold-icon">{heldItem.icon}</div>
+            <div className="hold-icon"><EntityIcon entity={heldItem}></EntityIcon></div>
             <div className="hold-value">{heldItem.value}</div>
           </>
         )}

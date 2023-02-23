@@ -1,6 +1,8 @@
 .mixer-grid {
   display: grid;
   grid-template-columns: repeat(3, var(--space-s));
+  border: 1px solid white;
+  width: min-content;
 }
 
 .mixer-grid .cell {

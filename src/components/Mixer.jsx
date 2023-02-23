@@ -1,6 +1,6 @@
 import "./Mixer.css";
 import { useState, useEffect, useRef } from "react";
-import Entity, { combineMap, mixerMap } from "../Entity";
+import Entity, { combineMap, mixerMap, EntityIcon } from "../Entity";
 
 export default function Mixer({ swapHeldItem, combineTime, mixTime }) {
   const [item1, setItem1] = useState(null);
@@ -89,32 +89,32 @@ export default function Mixer({ swapHeldItem, combineTime, mixTime }) {
     <div>
       Mixer
       <div className="mixer-grid">
-        <button className={`cell ${item1?.color}`} disabled={inUse} onClick={() => setItem1(swapHeldItem(item1))}>
-          {item1?.icon}
+        <button className={`cell`} disabled={inUse} onClick={() => setItem1(swapHeldItem(item1))}>
+          <EntityIcon entity={item1}></EntityIcon>
         </button>
-        <button className={`cell ${item2?.color}`} disabled={inUse} onClick={() => setItem2(swapHeldItem(item2))}>
-          {item2?.icon}
+        <button className={`cell`} disabled={inUse} onClick={() => setItem2(swapHeldItem(item2))}>
+          <EntityIcon entity={item2}></EntityIcon>
         </button>
-        <button className={`cell ${item3?.color}`} disabled={inUse} onClick={() => setItem3(swapHeldItem(item3))}>
-          {item3?.icon}
+        <button className={`cell`} disabled={inUse} onClick={() => setItem3(swapHeldItem(item3))}>
+          <EntityIcon entity={item3}></EntityIcon>
         </button>
-        <button className={`cell ${item4?.color}`} disabled={inUse} onClick={() => setItem4(swapHeldItem(item4))}>
-          {item4?.icon}
+        <button className={`cell`} disabled={inUse} onClick={() => setItem4(swapHeldItem(item4))}>
+          <EntityIcon entity={item4}></EntityIcon>
         </button>
-        <button className={`cell ${item5?.color}`} disabled={inUse} onClick={() => setItem5(swapHeldItem(item5))}>
-          {item5?.icon}
+        <button className={`cell`} disabled={inUse} onClick={() => setItem5(swapHeldItem(item5))}>
+          <EntityIcon entity={item5}></EntityIcon>
         </button>
-        <button className={`cell ${item6?.color}`} disabled={inUse} onClick={() => setItem6(swapHeldItem(item6))}>
-          {item6?.icon}
+        <button className={`cell`} disabled={inUse} onClick={() => setItem6(swapHeldItem(item6))}>
+          <EntityIcon entity={item6}></EntityIcon>
         </button>
-        <button className={`cell ${item7?.color}`} disabled={inUse} onClick={() => setItem7(swapHeldItem(item7))}>
-          {item7?.icon}
+        <button className={`cell`} disabled={inUse} onClick={() => setItem7(swapHeldItem(item7))}>
+          <EntityIcon entity={item7}></EntityIcon>
         </button>
-        <button className={`cell ${item8?.color}`} disabled={inUse} onClick={() => setItem8(swapHeldItem(item8))}>
-          {item8?.icon}
+        <button className={`cell`} disabled={inUse} onClick={() => setItem8(swapHeldItem(item8))}>
+          <EntityIcon entity={item8}></EntityIcon>
         </button>
-        <button className={`cell ${item9?.color}`} disabled={inUse} onClick={() => setItem9(swapHeldItem(item9))}>
-          {item9?.icon}
+        <button className={`cell`} disabled={inUse} onClick={() => setItem9(swapHeldItem(item9))}>
+          <EntityIcon entity={item9}></EntityIcon>
         </button>
       </div>
       <div ref={progressRef} className="progress-bar"></div>

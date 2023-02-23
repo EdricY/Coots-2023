@@ -1,20 +1,18 @@
 import "./Oven.css";
 import { useState, useEffect, useRef } from "react";
-import Entity, { bakeMap } from "../Entity";
+import Entity, { bakeMap, EntityIcon } from "../Entity";
 
 export default function Oven({ swapHeldItem, bakeTime }) {
   const [item, setItem] = useState(null);
-  const [baking, setBaking] = useState(false);
-  const [remainingTime, setRemainingTime] = useState(0);
   const progressRef = useRef();
   useEffect(() => {
-    if (!baking) return;
+    if (!item?.value) return;
     const animation = progressRef.current.animate([{ width: "0" }, { width: "100%" }], {
       duration: bakeTime,
       easing: "ease-out",
       iterations: Infinity,
     });
-    const interval = setInterval(() => {
+    const timeout = setTimeout(() => {
       setItem((item) => {
         if (!item?.value) return item;
         if (item.value === "ash") return item;
@@ -25,25 +23,21 @@ export default function Oven({ swapHeldItem, bakeTime }) {
     }, bakeTime);
 
     return () => {
-      clearInterval(interval);
+      clearTimeout(timeout);
       animation.cancel();
     };
-  }, [baking]);
+  }, [item]);
 
   return (
     <div>
       Oven
       <button
-        className={`cell ovenSquare ${item?.color}`}
-        disabled={baking}
+        className={`cell ovenSquare`}
         onClick={() => setItem(swapHeldItem(item))}
       >
-        {item?.icon}
+        <EntityIcon entity={item} key={item?.value} />
       </button>
       <div ref={progressRef} className="progress-bar"></div>
-      <button className="action-btn" onClick={() => setBaking(!baking)}>
-        {baking ? "Stop" : "Bake"}
-      </button>
     </div>
   );
 }

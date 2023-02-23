@@ -16,7 +16,7 @@
   position: fixed;
   pointer-events: none;
   border: 2px solid var(--yellow);
-  background-color: var(--pink);
+  background-color: var(--darkergray);
   height: var(--space-s);
   width: var(--space-s);
 
@@ -68,8 +68,10 @@
 }
 
 .ordersection {
-  margin-right: auto;
-  margin-bottom: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: var(--space-3xs);
   display: flex;
   gap: var(--space-2xs);
 }
@@ -91,7 +93,7 @@
   background-color: transparent;
   width: var(--space-s);
   height: var(--space-s);
-  border: 1px solid var(--darkgray);
+  border: 2px solid var(--darkgray);
   cursor: pointer;
   display: grid;
   place-items: center;
@@ -99,15 +101,15 @@
   font-size: var(--step-2);
 }
 
-.cell.gray {
+.gray {
   color: var(--darkergray);
 }
 
-.cell.pink {
+.pink {
   color: var(--red);
 }
 
-.cell.yellow {
+.yellow {
   color: var(--yellow);
 }
 
@@ -150,4 +152,25 @@
 .resource-getter .cell:hover {
   background-color: gray;
   color: var(--yellow);
+}
+
+
+.fresh {
+  animation: appear 0.3s cubic-bezier(.5, .5, .5, 2) forwards;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  50% {
+    opacity: 1; 
+  
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+
+  }
 }

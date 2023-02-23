@@ -1,40 +1,26 @@
 import { useState, useRef, useEffect } from "react";
-import Entity from "../Entity";
+import { EntityIcon } from "../Entity";
 
-export default function Serve({ swapHeldItem, orderList, setOrderList, setMenuOpen }) {
+export default function Serve({ swapHeldItem, orderList, setOrderList }) {
   const [item, setItem] = useState(null);
-  const [serving, setServing] = useState(false);
   useEffect(() => {
-    if (!serving) return;
-    //check orders
-    if (orderList[0].value != item.value) {
-      setServing(false);
-      return;
-    }
+    if (!item?.value) return;
+    if (!orderList?.length) return;
+    const matchedIdx = orderList.findIndex(x => x.value === item.value);
+    if (matchedIdx === -1) return;
     setItem(null);
     let newList = [...orderList];
-    newList.shift();
+    newList.splice(matchedIdx, 1);
     setOrderList(newList);
-    if (newList.length == 0) {
-      console.log("yay! fulled all the orders");
-      // TODO need to make sure this happens at the end of all the orders not just if you are on top of things
-      // maybe replace this with a finish level function instead
-      setMenuOpen(true);
-    }
-    setServing(false);
-  }, [serving]);
+  }, [item, orderList]);
 
   return (
     <div>
       <button
-        className={`cell ovenSquare ${item?.color}`}
-        disabled={serving}
+        className={`cell ovenSquare`}
         onClick={() => setItem(swapHeldItem(item))}
       >
-        {item?.icon}
-      </button>
-      <button className="" disabled={serving} onClick={() => setServing(true)}>
-        Serve
+        <EntityIcon entity={item} />
       </button>
     </div>
   );

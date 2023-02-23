@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import "./Counter.css";
+import { EntityIcon } from "../Entity";
+import "./counter.css";
 
 function Counter({ swapHeldItem, gridEntries, setGridEntries }) {
   function handleSelectCell(item, index) {
@@ -9,21 +10,19 @@ function Counter({ swapHeldItem, gridEntries, setGridEntries }) {
   }
 
   return (
-    <>
-      <div className="grid-container">
-        {gridEntries.map((x, index) => (
-          <button
-            className={`cell ${x?.color}`}
-            key={index}
-            onClick={() => {
-              handleSelectCell(x, index);
-            }}
-          >
-            {x?.icon}
-          </button>
-        ))}
-      </div>
-    </>
+    <div className="grid-container">
+      {gridEntries.map((x, index) => (
+        <button
+          className={`cell`}
+          key={index}
+          onClick={() => {
+            handleSelectCell(x, index);
+          }}
+        >
+          <EntityIcon entity={x} />
+        </button>
+      ))}
+    </div>
   );
 }
 
