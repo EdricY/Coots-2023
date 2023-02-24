@@ -1,52 +1,68 @@
 import * as twgl from "twgl.js";
-import { useEffect, useRef, useState } from "react";
-import cookieDough from "./assets/biscuit.png";
-// TODO : this works but needs more work
-const cookieDoughImg = new Image();
-cookieDoughImg.src = cookieDough;
-const imgs = {};
+import React, { useEffect, useRef, useState } from "react";
+import * as icons from "./assets/iconAssets";
 
-export default function DiceElement({ faceIdx, rollStart, level }) {
-  // TODO: level determines which faces the dice has
+const imgs = {}
+for (let key in icons) {
+  imgs[key] = new Image();
+}
+
+Object.keys(imgs).forEach(key => {
+  imgs[key].src = icons[key];
+})
+
+
+const diceFacesMap = new Map(Object.entries({
+  1: {
+    faces: ["sugar", "corn", "egg", "flour", "flour", "flour",],
+    colors: ["#f7c7b3", "#ca4b42", "#c3d4e7", "#f7c7b3", "#ca4b42", "#c3d4e7"],
+  },
+
+}))
+
+console.log(diceFacesMap)
+export default function DiceElement({ diceId, callback }) {
   const ref = useRef();
-  const [x, setX] = useState();
+  const [diceObj, setDiceObj] = useState();
+  const [lastRollTime, setLastRollTime] = useState(Date.now());
+  const [faces] = useState(diceFacesMap.get(diceId).faces);
   useEffect(() => {
     if (!ref.current) return;
-    console.log(level);
-
     const dice = new Dice(
       ref.current,
-      [cookieDoughImg, cookieDoughImg, cookieDoughImg, cookieDoughImg, "", ""],
-      ["green", "blue", "red", "yellow", "cyan", "magenta"]
+      faces,
+      diceFacesMap.get(diceId).colors
     );
-    dice.roll(1, 2000, 0.01 + Math.random() / 1000);
-    setX(dice);
+    dice.roll(0, 2000, 0.01 + Math.random() / 1000);
+    setDiceObj(dice);
   }, [ref.current]);
 
   useAnimationFrame(() => {
-    if (!x) return;
-    console.log("raf");
-    x?.drawScene();
-    return x.isDoneRolling(Date.now());
-  }, [x, rollStart]);
+    if (!diceObj) return true;
+    diceObj?.drawScene();
+    return diceObj.isDoneRolling(Date.now());
+  }, [diceObj, lastRollTime]);
 
-  useEffect(() => {
-    if (!x) return;
-    x.roll(faceIdx, 2000, 0.01 + Math.random() / 1000);
-  }, [x, rollStart]);
+  useEffect(() => console.log("dd", diceObj), [diceObj]);
 
-  return <canvas ref={ref} width="150" height="150"></canvas>;
+  const onClick = () => {
+    if (!diceObj.isDoneRolling(Date.now())) return;
+    callback?.(faces[diceObj.faceIdx])
+    setLastRollTime(Date.now());
+    diceObj.roll(Math.floor(Math.random() * 6), 2000, 0.01 + Math.random() / 1000);
+  }
+
+
+  return <div className="relative">
+    <canvas ref={ref} width="120" height="120"></canvas>
+    <button
+      className="absolute inset-0 transparent-btn"
+      onClick={onClick}></button>
+  </div>
+
 }
 
-const faceCoords = [
-  { x: 0, y: Math.PI / -2 },
-  { x: 0, y: Math.PI / 2 },
-  { x: Math.PI / 2, y: 0 },
-  { x: Math.PI / -2, y: 0 },
-  { x: 0, y: 0 },
-  { x: 0, y: Math.PI },
-];
-
+// based on https://css-tricks.com/using-requestanimationframe-with-react-hooks/
 const useAnimationFrame = (callback, deps) => {
   // Use useRef for mutable variables that we want to persist
   // without triggering a re-render on their change
@@ -60,22 +76,25 @@ const useAnimationFrame = (callback, deps) => {
   };
 
   useEffect(() => {
+    console.log("deps", deps)
+  }, deps)
+
+  useEffect(() => {
     requestAnimationFrame(animate);
     return () => cancelAnimationFrame(requestRef.current);
-  }, [deps]);
+  }, deps);
+
 };
 
-const Counter = () => {
-  const [count, setCount] = useState(0);
 
-  useAnimationFrame((deltaTime) => {
-    // Pass on a function to the setter of the state
-    // to make sure we always have the latest state
-    setCount((prevCount) => (prevCount + deltaTime * 0.01) % 100);
-  });
-
-  return <div>{Math.round(count)}</div>;
-};
+const faceCoords = [
+  { x: 0, y: Math.PI / -2 },
+  { x: 0, y: Math.PI / 2 },
+  { x: Math.PI / 2, y: 0 },
+  { x: Math.PI / -2, y: 0 },
+  { x: 0, y: 0 },
+  { x: 0, y: Math.PI },
+];
 
 class Dice {
   constructor(canvas, faces, colors) {
@@ -165,12 +184,12 @@ class Dice {
     return dx * dx + dy * dy < 50 * 50;
   }
 
-  draw(ctx, x = this.x, y = this.y) {
-    this.drawScene();
-    this.canvas.height = 100;
-    this.canvas.width = 100;
-    ctx.drawImage(this.gl.canvas, x - 50, y - 50, 100, 100);
-  }
+  // draw(ctx, x = this.x, y = this.y) {
+  //   this.drawScene();
+  //   this.canvas.height = 100;
+  //   this.canvas.width = 100;
+  //   ctx.drawImage(this.gl.canvas, x - 50, y - 50, 100, 100);
+  // }
 
   drawScene() {
     let { program, positionLocation, matrixLocation, textureLocation } = this;
@@ -267,7 +286,7 @@ function degToRad(d) {
   return (d * Math.PI) / 180;
 }
 
-function generateFace(ctx, faceColor, textColor, text) {
+function generateFace(ctx, faceColor, textColor, imgId) {
   let backImg = imgs[faceColor];
   const { width, height } = ctx.canvas;
   if (backImg) {
@@ -277,16 +296,12 @@ function generateFace(ctx, faceColor, textColor, text) {
     ctx.fillRect(0, 0, width, height);
   }
 
-  let img = text;
-  if (img) {
-    ctx.drawImage(img, 0, 0, width, height);
-  } else {
-    ctx.font = `${width * 0.7}px sans-serif`;
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = textColor;
-    ctx.fillText(text, width / 2, height / 2);
-  }
+  let img = imgs[imgId]
+  ctx.drawImage(img, 0, 0, width, height);
+
+  // const d = img.querySelector("path").getAttribute("d");
+  // const path = new Path2D(d);
+  // ctx.stroke(path);
 }
 
 // Fill the buffer with the values that define a cube.

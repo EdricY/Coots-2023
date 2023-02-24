@@ -3,3 +3,10 @@
   height: var(--space-s);
   border: 1px solid var(--darkgray); */
 }
+
+
+.catBox {
+  position: absolute;
+  bottom: var(--space-3xs);
+  right: calc(var(--space-3xs) * 1.5 + var(--space-2xs));
+}

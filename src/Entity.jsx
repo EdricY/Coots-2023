@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import * as iconAssets from "./assets/iconAssets";
 import { FaEgg } from "react-icons/fa";
 import { HiCake } from "react-icons/hi";
 import {
@@ -10,35 +11,30 @@ import {
   GiFishbone,
   GiButter,
   GiCookie,
-  GiPretzel,
   GiCorn,
   GiBreadSlice,
   GiHollowCat,
   GiFeline,
 } from "react-icons/gi";
-import batter from "./assets/batter.png";
-import cookieDough from "./assets/biscuit.png";
 
-const iconMap = new Map(
+export const iconMap = new Map(
   Object.entries({
-    egg: <FaEgg color="red"/>,
-    flour: <GiFlour />,
-    ash: <GiSquib />,
-    dough: <GiDoughRoller />,
-    cornDough: <GiDoughRoller />,
-    batter: <img className="icon-img" src={batter} />,
-    sugar: <GiPowderBag />,
+    egg: <img className="icon-img" src={iconAssets.egg} />,
+    flour: <img className="icon-img" src={iconAssets.flour} />,
+    ash: <img className="icon-img" src={iconAssets.ash} />,
+    dough: <img className="icon-img" src={iconAssets.dough} />,
+    batter: <img className="icon-img" src={iconAssets.batter} />,
+    sugar: <img className="icon-img" src={iconAssets.sugar} />,
     cake: <GiStairsCake />,
-    fishbone: <GiFishbone />,
-    butter: <GiButter />,
+    catfood: <img className="icon-img" src={iconAssets.catfood} />,
+    butter: <img className="icon-img" src={iconAssets.butter} />,
     cookie: <GiCookie />,
-    cookieDough: <img className="icon-img" src={cookieDough} />,
-    pretzel: <GiPretzel />,
-    corn: <GiCorn />,
+    cookieDough: <img className="icon-img" src={iconAssets.cookieDough} />,
+    bread: <img className="icon-img" src={iconAssets.bread} />,
+    corn: <img className="icon-img" src={iconAssets.corn} />,
     cornBread: <GiBreadSlice />,
-    "birthday cake": <HiCake />,
-    "happy coots": <GiHollowCat />,
-    cat: <GiFeline />,
+    birthdaycake: <HiCake />,
+    fish: <img className="icon-img" src={iconAssets.fish} />,
   })
 );
 
@@ -46,8 +42,7 @@ export const bakeMap = new Map(
   Object.entries({
     batter: "cake",
     cookieDough: "cookie",
-    dough: "pretzel",
-    cornDough: "cornBread",
+    dough: "bread",
   })
 );
 
@@ -56,7 +51,6 @@ export const mixerMap = new Map(
     "egg-egg-egg-flour-flour-flour-flour-flour-flour": "dough",
     "flour-flour-flour-egg-egg-egg-flour-flour-flour": "dough",
     "flour-flour-flour-flour-flour-flour-egg-egg-egg": "dough",
-    "flour-flour-flour-corn-corn-corn-egg-egg-egg": "cornDough",
     "flour-flour-flour-egg-egg-egg-sugar-sugar-sugar": "batter",
     "sugar-sugar-sugar-egg-egg-egg-flour-flour-flour": "batter",
     "butter-butter-butter-sugar-sugar-sugar-egg-egg-egg": "batter",
@@ -67,13 +61,13 @@ export const mixerMap = new Map(
 export const combineMap = new Map(
   Object.entries({
     "flour--------": "sugar",
-    "cake-candle------": "birthday cake",
-    "cat-cat-cat------": "happy coots",
+    "cake-candle------": "birthdaycake",
+    "cat-cat-cat------": "happycoots",
   })
 );
 const ingredients = ["flour", "egg", "sugar", "butter", "corn"];
 const inbetween = ["batter", "dough", "cornDough", "cookieDough"];
-const final = ["cake", "cookie", "pretzel", "cornBread"];
+const final = ["cake", "cookie", "bread", "cornBread"];
 
 export default class Entity {
   icon = null;

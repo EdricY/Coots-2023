@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Fragment } from "react";
 import { FaEgg } from "react-icons/fa";
 import { GiButter, GiCorn, GiFeline, GiFlour, GiPowderBag, GiSpellBook } from "react-icons/gi";
 import "./App.css";
@@ -6,10 +6,11 @@ import AngerMeter from "./components/AngerMeter";
 import Counter from "./components/Counter";
 import Mixer from "./components/Mixer";
 import OrderTerminal from "./components/OrderTerminal";
+import CatBox from "./components/CatBox";
 import Oven from "./components/Oven";
 import Recipe from "./components/Recipe";
 import Serve from "./components/Serve";
-import Entity, { EntityIcon } from "./Entity";
+import Entity, { EntityIcon, iconMap } from "./Entity";
 import Trash from "./Trash";
 import Dice from "./Dice";
 import { gridStartData } from "./data";
@@ -18,10 +19,8 @@ import Menu from "./Menu";
 function App() {
   const [heldItem, setHeldItem] = useState(null);
   const [recipeOpen, setRecipeOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [gridEntries, setGridEntries] = useState(gridStartData);
-  const [rollStart, setRollStart] = useState(Date.now());
-  const [faceIdx, setFaceIdx] = useState(0);
   const [level, setLevel] = useState(0);
 
   const holdRef = useRef();
@@ -43,9 +42,8 @@ function App() {
     setHeldItem(x);
     return heldItem;
   };
-
   const [angerProgress, setAngerProgress] = useState(0);
-  const addAnger = (amt) => setAngerProgress(x => Math.min(100, x+amt));
+  const addAnger = (amt) => setAngerProgress(x => Math.min(100, x + amt));
   useEffect(() => {
     if (level < 1) return;
     const t = setInterval(() => {
@@ -57,10 +55,10 @@ function App() {
   }, [level]);
 
   const orderOptions = [
-    { level: 0, options: ["pretzel"] },
-    { level: 1, options: ["pretzel", "cornBread"] },
-    { level: 2, options: ["cake", "pretzel", "cornBread"] },
-    { level: 3, options: ["cookie", "cake", "pretzel", "cornBread"] },
+    { level: 0, options: ["bread"] },
+    { level: 1, options: ["bread", "cornBread"] },
+    { level: 2, options: ["cake", "bread", "cornBread"] },
+    { level: 3, options: ["cookie", "cake", "bread", "cornBread"] },
   ];
   const [orderList, setOrderList] = useState([
     new Entity(orderOptions[level].options[Math.floor(Math.random() * orderOptions[level].options.length)]),
@@ -141,7 +139,7 @@ function App() {
         </div>
       </div>
 
-      <div className="resource-getter">
+      {/* <div className="resource-getter">
         <button className="cell" onClick={() => addResource(new Entity("egg"))}>
           <FaEgg />
         </button>
@@ -160,23 +158,31 @@ function App() {
         <button className="cell" onClick={() => addResource(new Entity("cat"))}>
           <GiFeline />
         </button>
+      </div> */}
+      <div className="flex">
+
+        <Dice
+          diceId={"1"}
+          callback={(x) => {
+            console.log(x)
+            addAnger(Math.random() * 20)
+          }}
+        />
+        {/* <Dice
+          diceId={"1"}
+          callback={(x) => {
+            console.log(x)
+            addAnger(Math.random() * 20)
+          }}
+        /> */}
       </div>
-      <Dice faceIdx={faceIdx} rollStart={rollStart} level={level} />
-      <button
-        onClick={() => {
-          setRollStart(Date.now());
-          setFaceIdx(Math.floor(Math.random() * 6));
-          addAnger(Math.random() * 20)
-        }}
-      >
-        roll
-      </button>
       <div className="tools-container">
         <Trash swapHeldItem={swapHeldItem} trashTime={2000} />
         <Oven swapHeldItem={swapHeldItem} bakeTime={2000} />
         <Mixer swapHeldItem={swapHeldItem} combineTime={1000} mixTime={3000} />
       </div>
       <Counter swapHeldItem={swapHeldItem} gridEntries={gridEntries} setGridEntries={setGridEntries} />
+      <CatBox swapHeldItem={swapHeldItem} callback={() => console.log("cattt")} />
       <AngerMeter progress={angerProgress} onFilled={onAngerFull} />
 
       <div className={`hold-container ${!heldItem?.value ? "hide" : ""}`} ref={holdRef}>
@@ -188,6 +194,13 @@ function App() {
         )}
       </div>
       <Recipe isOpen={recipeOpen} setClosed={() => setRecipeOpen(false)} />
+      <div className="hide">
+        {[...iconMap.entries()].map(([key, icon]) => (<Fragment key={key}>
+
+          {{ ...icon, props: { id: key, ...icon.props, key } }}
+        </Fragment>
+        ))}
+      </div>
     </div>
   );
 }

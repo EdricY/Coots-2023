@@ -165,7 +165,7 @@ export default function Recipe({ isOpen, setClosed }) {
               <div className="cell">
                 <GiDoughRoller />
               </div>
-              <p>PRETZEL</p>
+              <p>Bread</p>
               <p>1st make dough</p>
               <div className="recipe-grid">
                 <div className="cell">
@@ -240,9 +240,9 @@ export default function Recipe({ isOpen, setClosed }) {
                 which is why you want to fill the center row with it, so everyone will know that it is corn bread, and
                 so the corn flavor can seep into the egg below and the flour above.
               </p>
-              <p>Pretzel.</p>
+              <p>Bread</p>
               <p>
-                Now the pretzel is maybe my easiest recipe which is why I put it last. Pretezls is just baked dough.
+                Now the bread is maybe my easiest recipe which is why I put it last. Bread is just baked dough!
                 Remember that, when you boil down all baking you really get down to the fundementals and that
                 fundemental can really help you master the more complex stuff. Dough is very forgiving, and really you
                 just need to make sure that you layer your ingrediants evenly.
@@ -257,6 +257,11 @@ export default function Recipe({ isOpen, setClosed }) {
                 flour, you can even put the egg inbetween the flour, flour on top and flour on bottom. Go crazy explore.
                 Once you have the dough just go ahead and pop that in the oven. But don't over cook.
               </p>
+
+              <a href="https://www.flaticon.com/free-icons/batter" title="batter icons">Batter icons created by VitaminRGB - Flaticon</a>
+              <a href="https://www.flaticon.com/free-icons/bread" title="bread icons">Bread icons created by ultimatearm - Flaticon</a>
+              <a href="https://www.flaticon.com/free-icons/butter" title="Butter icons">Butter icons created by Smashicons - Flaticon</a>
+              <a href="https://www.flaticon.com/free-icons/bread" title="bread icons">Bread icons created by kerismaker - Flaticon</a>
             </>
           )}
           <button onClick={() => setEasyMode(!easyMode)}>{easyMode ? "hard mode recipe" : "easy mode recipes"}</button>

@@ -77,6 +77,26 @@ body {
   max-height: 1280px;
 }
 
+.relative {
+  position: relative;
+}
+
+.opacity-sm {
+  opacity: .1;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.inset-0 {
+  inset: 0;
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
 .flex-1 {
   flex: 1 1 auto;
 }
@@ -100,4 +120,14 @@ body {
 
 .mr-1 {
   margin-right: var(--space-3xs);
+}
+
+.hide {
+  display: none;
+}
+
+.transparent-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
