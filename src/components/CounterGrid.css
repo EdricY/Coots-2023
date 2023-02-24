@@ -13,10 +13,10 @@
   position: relative;
 }
 
-/* .grid-container::after {
-  content: "asdf";
+.grid-container .cell::after {
+  content: "";
   display: block;
   position: absolute;
   inset: 0;
   background-color: black;
-} */
+}

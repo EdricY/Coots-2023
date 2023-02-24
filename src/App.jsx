@@ -22,6 +22,7 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [gridEntries, setGridEntries] = useState(gridStartData);
   const [level, setLevel] = useState(0);
+  const [disabledRow, setDisabledRow] = useState(2);
 
   const holdRef = useRef();
   useEffect(() => {
@@ -181,7 +182,13 @@ function App() {
         <Oven swapHeldItem={swapHeldItem} bakeTime={2000} />
         <Mixer swapHeldItem={swapHeldItem} combineTime={1000} mixTime={3000} />
       </div>
-      <Counter swapHeldItem={swapHeldItem} gridEntries={gridEntries} setGridEntries={setGridEntries} />
+      {disabledRow}
+      <Counter
+        swapHeldItem={swapHeldItem}
+        gridEntries={gridEntries}
+        setGridEntries={setGridEntries}
+        disabledRow={disabledRow} clearDisabledRow={() => setDisabledRow(0)}
+      />
       <CatBox swapHeldItem={swapHeldItem} callback={() => console.log("cattt")} />
       <AngerMeter progress={angerProgress} onFilled={onAngerFull} />
 
