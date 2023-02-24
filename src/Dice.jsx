@@ -21,6 +21,7 @@ const diceFacesMap = new Map(Object.entries({
 }))
 
 console.log(diceFacesMap)
+const rollTime = 200;
 export default function DiceElement({ diceId, callback }) {
   const ref = useRef();
   const [diceObj, setDiceObj] = useState();
@@ -33,7 +34,7 @@ export default function DiceElement({ diceId, callback }) {
       faces,
       diceFacesMap.get(diceId).colors
     );
-    dice.roll(0, 2000, 0.01 + Math.random() / 1000);
+    dice.roll(0, rollTime, 0.01 + Math.random() / 1000);
     setDiceObj(dice);
   }, [ref.current]);
 
@@ -49,7 +50,7 @@ export default function DiceElement({ diceId, callback }) {
     if (!diceObj.isDoneRolling(Date.now())) return;
     callback?.(faces[diceObj.faceIdx])
     setLastRollTime(Date.now());
-    diceObj.roll(Math.floor(Math.random() * 6), 2000, 0.01 + Math.random() / 1000);
+    diceObj.roll(Math.floor(Math.random() * 6), rollTime, 0.01 + Math.random() / 1000);
   }
 
 
