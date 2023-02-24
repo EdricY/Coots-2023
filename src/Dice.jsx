@@ -7,9 +7,11 @@ for (let key in icons) {
   imgs[key] = new Image();
 }
 
+let loaded = 0;
 Object.keys(imgs).forEach(key => {
   imgs[key].src = icons[key];
-})
+  imgs[key].onload = () => {loaded ++};
+});
 
 
 const diceFacesMap = new Map(Object.entries({
@@ -29,13 +31,23 @@ export default function DiceElement({ diceId, callback }) {
   const [faces] = useState(diceFacesMap.get(diceId).faces);
   useEffect(() => {
     if (!ref.current) return;
-    const dice = new Dice(
-      ref.current,
-      faces,
-      diceFacesMap.get(diceId).colors
-    );
-    dice.roll(0, rollTime, 0.01 + Math.random() / 1000);
-    setDiceObj(dice);
+
+    let loadint = callUntilSuccess(() => {
+      if (loaded !== Object.keys(imgs).length) {
+        console.log("waiting for imgs to load ", loaded)
+        return false;
+      }
+      const dice = new Dice(
+        ref.current,
+        faces,
+        diceFacesMap.get(diceId).colors
+      );
+      dice.roll(0, rollTime, 0.01 + Math.random() / 1000);
+      setDiceObj(dice);
+      return true;
+    }, 100)
+
+    return () => clearInterval(loadint)
   }, [ref.current]);
 
   useAnimationFrame(() => {
@@ -43,8 +55,6 @@ export default function DiceElement({ diceId, callback }) {
     diceObj?.drawScene();
     return diceObj.isDoneRolling(Date.now());
   }, [diceObj, lastRollTime]);
-
-  useEffect(() => console.log("dd", diceObj), [diceObj]);
 
   const onClick = () => {
     if (!diceObj.isDoneRolling(Date.now())) return;
@@ -77,16 +87,22 @@ const useAnimationFrame = (callback, deps) => {
   };
 
   useEffect(() => {
-    console.log("deps", deps)
-  }, deps)
-
-  useEffect(() => {
     requestAnimationFrame(animate);
     return () => cancelAnimationFrame(requestRef.current);
   }, deps);
 
 };
 
+
+function callUntilSuccess(func, intTime=100) {
+  const success = func();
+  if (success) return;
+  let interval = setInterval(() => {
+    const success = func();
+    if (success) clearInterval(interval);
+  }, intTime);
+  return interval;
+}
 
 const faceCoords = [
   { x: 0, y: Math.PI / -2 },

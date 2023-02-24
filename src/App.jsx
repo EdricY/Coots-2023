@@ -22,7 +22,7 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [gridEntries, setGridEntries] = useState(gridStartData);
   const [level, setLevel] = useState(0);
-  const [disabledRow, setDisabledRow] = useState(2);
+  const [disabledRow, setDisabledRow] = useState(0);
 
   const holdRef = useRef();
   useEffect(() => {
@@ -85,7 +85,14 @@ function App() {
 
   const onAngerFull = () => {
     setAngerProgress(0);
-    rage();
+    const r = Math.floor(Math.random() * 3)
+    setDisabledRow(r + 1)
+    let start = r * 8;
+    let copyGrid = [...gridEntries];
+    for (let idx = 0; idx < 8; idx++) {
+      copyGrid[start + idx] = null;
+    }
+    setGridEntries(copyGrid);
   };
 
   function addResource(resource) {
@@ -102,19 +109,6 @@ function App() {
       copyGrid[randoslot] = resource;
       setGridEntries(copyGrid);
     }
-  }
-
-  const rowStarts = [0, 8, 16];
-  function rage() {
-    let randomRow = rowStarts[Math.floor(Math.random() * 3)];
-    let copyGrid = [...gridEntries];
-    for (let idx = 0; idx < copyGrid.length; idx++) {
-      if (idx >= randomRow && idx <= randomRow + 7) {
-        // TODO add animation here for resources disappearing
-        copyGrid[idx] = null;
-      }
-    }
-    setGridEntries(copyGrid);
   }
 
   return (
@@ -182,12 +176,12 @@ function App() {
         <Oven swapHeldItem={swapHeldItem} bakeTime={2000} />
         <Mixer swapHeldItem={swapHeldItem} combineTime={1000} mixTime={3000} />
       </div>
-      {disabledRow}
       <Counter
         swapHeldItem={swapHeldItem}
         gridEntries={gridEntries}
         setGridEntries={setGridEntries}
-        disabledRow={disabledRow} clearDisabledRow={() => setDisabledRow(0)}
+        disabledRow={disabledRow}
+        clearDisabledRow={() => setDisabledRow(0)}
       />
       <CatBox swapHeldItem={swapHeldItem} callback={() => console.log("cattt")} />
       <AngerMeter progress={angerProgress} onFilled={onAngerFull} />
