@@ -76,14 +76,13 @@ function App() {
     { level: 2, options: ["cake", "bread", "cornBread"] },
     { level: 3, options: ["cookie", "cake", "bread", "cornBread"] },
   ];
-
-  const [orderList, setOrderList] = useState([
-    new Entity(orderOptions[level].options[Math.floor(Math.random() * orderOptions[level].options.length)]),
-    new Entity(orderOptions[level].options[Math.floor(Math.random() * orderOptions[level].options.length)]),
-  ]);
+  
+    const [orderList, setOrderList] = useState([
+      new Entity(orderOptions[level].options[Math.floor(Math.random() * orderOptions[level].options.length)]),
+      new Entity(orderOptions[level].options[Math.floor(Math.random() * orderOptions[level].options.length)]),
+    ]);
 
   useEffect(() => {
-    // TODO make order zoom in from the right?
     let orders = 0;
     let numOfOrders = (level + 2) * 2; // TODO tweak the order numbers
     const t = setInterval(() => {
@@ -145,7 +144,7 @@ function App() {
           <span className="text-shadow">Orders</span>
           <OrderTerminal
             orderList={orderList}
-            removeFromList={x => setOrderList(orderList.filter(y => y.id !== x.id))}
+            removeFromList={x => setOrderList(orderList => [...orderList].filter(y => y.id !== x.id))}
             swapHeldItem={swapHeldItem}
           />
           
