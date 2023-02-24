@@ -37,6 +37,7 @@ function App() {
     };
   }, [holdRef]);
 
+
   const swapHeldItem = (x) => {
     if (x) x.fresh = false;
     if (heldItem) heldItem.fresh = false;
@@ -44,7 +45,7 @@ function App() {
     return heldItem;
   };
   const [angerProgress, setAngerProgress] = useState(0);
-  const addAnger = (amt) => setAngerProgress(x => Math.min(100, x + amt));
+  const addAnger = (amt) => setAngerProgress(x => Math.max(0,Math.min(100, x + amt)));
   useEffect(() => {
     if (level < 1) return;
     const t = setInterval(() => {
@@ -55,15 +56,32 @@ function App() {
     };
   }, [level]);
 
+  const addToGrid = value => {
+    const slotIndices = [];
+    console.log(value);
+    for(let i = 0; i< gridEntries.length; i++) {
+      if (gridEntries[i] === null) slotIndices.push(i);
+    }
+    if (slotIndices.length === 0) return;
+    const r = Math.floor(Math.random() * slotIndices.length)
+    const idx = slotIndices[r];
+    const entriesCopy = [...gridEntries];
+    entriesCopy[idx] = new Entity(value);
+    setGridEntries(entriesCopy);
+  }
+
   const orderOptions = [
     { level: 0, options: ["bread"] },
     { level: 1, options: ["bread", "cornBread"] },
     { level: 2, options: ["cake", "bread", "cornBread"] },
     { level: 3, options: ["cookie", "cake", "bread", "cornBread"] },
   ];
+
   const [orderList, setOrderList] = useState([
     new Entity(orderOptions[level].options[Math.floor(Math.random() * orderOptions[level].options.length)]),
+    new Entity(orderOptions[level].options[Math.floor(Math.random() * orderOptions[level].options.length)]),
   ]);
+
   useEffect(() => {
     // TODO make order zoom in from the right?
     let orders = 0;
@@ -124,13 +142,13 @@ function App() {
           <GiSpellBook />
         </button>
         <div>
-          Orders
-          <OrderTerminal orderList={orderList} />
-          <Serve
-            swapHeldItem={swapHeldItem}
+          <span className="text-shadow">Orders</span>
+          <OrderTerminal
             orderList={orderList}
-            setOrderList={setOrderList}
+            removeFromList={x => setOrderList(orderList.filter(y => y.id !== x.id))}
+            swapHeldItem={swapHeldItem}
           />
+          
         </div>
       </div>
 
@@ -159,8 +177,8 @@ function App() {
         <Dice
           diceId={"1"}
           callback={(x) => {
-            console.log(x)
-            addAnger(Math.random() * 20)
+            addToGrid(x)
+            addAnger(1 + Math.random() * 2)
           }}
         />
         {/* <Dice
@@ -183,7 +201,7 @@ function App() {
         disabledRow={disabledRow}
         clearDisabledRow={() => setDisabledRow(0)}
       />
-      <CatBox swapHeldItem={swapHeldItem} callback={() => console.log("cattt")} />
+      <CatBox swapHeldItem={swapHeldItem} callback={() => addAnger(-20)} />
       <AngerMeter progress={angerProgress} onFilled={onAngerFull} />
 
       <div className={`hold-container ${!heldItem?.value ? "hide" : ""}`} ref={holdRef}>

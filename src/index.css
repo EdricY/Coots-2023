@@ -81,8 +81,16 @@ body {
   position: relative;
 }
 
+.bg-gray {
+  background-color: gray;
+}
+
+.text-white {
+  color: white;
+}
+
 .opacity-sm {
-  opacity: .1;
+  opacity: .4;
 }
 
 .absolute {
@@ -111,6 +119,10 @@ body {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
 }
 
 .flex-col {

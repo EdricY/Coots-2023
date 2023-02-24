@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { GiTrashCan } from "react-icons/gi";
 import Entity, { EntityIcon } from "./Entity";
 
 export default function Trash({ swapHeldItem, trashTime }) {
@@ -18,14 +19,22 @@ export default function Trash({ swapHeldItem, trashTime }) {
 
     return () => {
       clearTimeout(timeout);
+      animation.cancel();
     };
   }, [item]);
 
+
   return (
     <div>
-      Trash
-      <button className="cell ovenSquare" onClick={() => setItem(swapHeldItem(item))}>
+      <span className="text-shadow">Trash</span>
+      <button className="cell ovenSquare relative" onClick={() => setItem(swapHeldItem(item))}>
         <EntityIcon entity={item}></EntityIcon>
+
+        {!item &&
+          <div className="absolute inset-0 opacity-sm pointer-events-none">
+            <GiTrashCan />
+          </div>
+        }
       </button>
       <div ref={progressRef} className="progress-bar"></div>
     </div>

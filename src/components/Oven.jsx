@@ -1,6 +1,7 @@
 import "./Oven.css";
 import { useState, useEffect, useRef } from "react";
 import Entity, { bakeMap, EntityIcon } from "../Entity";
+import { GiFurnace } from "react-icons/gi";
 
 export default function Oven({ swapHeldItem, bakeTime }) {
   const [item, setItem] = useState(null);
@@ -30,12 +31,17 @@ export default function Oven({ swapHeldItem, bakeTime }) {
 
   return (
     <div>
-      Oven
+      <span className="text-shadow">Oven</span>
       <button
-        className={`cell ovenSquare`}
+        className={`cell ovenSquare relative`}
         onClick={() => setItem(swapHeldItem(item))}
       >
         <EntityIcon entity={item} key={item?.value} />
+        {!item &&
+          <div className="absolute inset-0 opacity-sm pointer-events-none flex items-center justify-center">
+            <GiFurnace />
+          </div>
+        }
       </button>
       <div ref={progressRef} className="progress-bar"></div>
     </div>

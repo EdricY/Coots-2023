@@ -25,7 +25,7 @@
   align-items: center;
   justify-content: center;
   gap: 1px;
-  line-height: 0.6;
+  line-height: 0.8;
 }
 
 .hold-icon {
@@ -126,7 +126,9 @@
   background-color: peru;
 }
 .tools-container {
-  padding-inline: calc((100vmin - var(--grid-cols) * var(--space-s)) / 2 - var(--space-3xs));
+  width: calc(var(--space-s) * 8);
+  margin-inline: auto;
+  /* padding-inline: calc((100vmin - var(--grid-cols) * var(--space-s)) / 2 - var(--space-3xs)); */
   align-self: flex-start;
   display: flex;
   gap: var(--space-2xs);
@@ -155,6 +157,9 @@
   color: var(--yellow);
 }
 
+.text-shadow {
+  text-shadow: 2px 2px 2px black;
+}
 
 .fresh {
   animation: appear 0.3s cubic-bezier(.5, .5, .5, 2) forwards;

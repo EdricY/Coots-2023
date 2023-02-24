@@ -12,7 +12,74 @@
   border: 1px solid var(--lightgray);
   cursor: pointer;
   font-size: var(--step-2);
+  color: var(--yellow);
+
   display: grid;
   place-items: center;
-  color: var(--yellow);
+  position: relative;
+
+  animation: jumpNearEnd 60s linear;
+  transform-origin: center center;
+}
+
+@keyframes jumpNearEnd {
+  0% {
+    transform: translateY(0) rotate(0);
+  }
+  90% { 
+    transform: translateY(0) rotate(0);
+  }
+  91%, 92%, 93%, 94%, 95%, 96%, 97%, 98%, 99% { 
+    transform: translateY(-5%) rotate(-2deg);
+  }
+  91.5%, 92.5%, 93.5%, 94.5%, 95.5%, 96.5%, 97.5%, 98.5%, 99.5% { 
+    transform: translateY(5%) rotate(2deg);
+  }
+  100% { 
+    transform: translateY(0) rotate(0);;
+  }
+}
+
+.order .circleSvg {
+  position: absolute;
+  inset: 0;
+}
+
+.order .circle {
+  stroke-dasharray: 0 252;
+  stroke-dashoffset: 62;
+  stroke-linecap: round;
+  animation: clockfill 60s ease-out;
+}
+
+@keyframes clockfill {
+  0% {
+    stroke-dasharray: 0 252;
+    stroke: #000000AA;
+  }
+  90% {
+    stroke: #000000AA;
+  }
+  100% {
+    stroke-dasharray: 252 0;
+    stroke: #FF0000AA;
+  }
+}
+
+.serve-window {
+  position: absolute;
+  top: 100%;
+}
+
+.order.fulfilled {
+  background-color: var(--cyan);
+  transition: background-color 0.2s linear;
+  animation: shrink-out 0.5s ease-in forwards;
+}
+
+@keyframes shrink-out {
+  0% {transform: scale(1);}
+  20% {transform: scale(1.1);}
+  95% {transform: scale(0);}
+  100% {transform: scale(0);}
 }

@@ -281,6 +281,7 @@ class Dice {
   }
 
   roll(targetIdx, duration, force) {
+    this.faceIdx = targetIdx;
     this.rotXTarget = faceCoords[targetIdx].x + Math.random() * 0.5 - 0.25;
     this.rotYTarget = faceCoords[targetIdx].y + Math.random() * 0.5 - 0.25;
     this.rollStopTime = Date.now() + duration;

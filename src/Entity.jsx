@@ -19,22 +19,22 @@ import {
 
 export const iconMap = new Map(
   Object.entries({
-    egg: <img className="icon-img" src={iconAssets.egg} />,
-    flour: <img className="icon-img" src={iconAssets.flour} />,
-    ash: <img className="icon-img" src={iconAssets.ash} />,
-    dough: <img className="icon-img" src={iconAssets.dough} />,
-    batter: <img className="icon-img" src={iconAssets.batter} />,
-    sugar: <img className="icon-img" src={iconAssets.sugar} />,
-    cake: <GiStairsCake />,
-    catfood: <img className="icon-img" src={iconAssets.catfood} />,
-    butter: <img className="icon-img" src={iconAssets.butter} />,
-    cookie: <GiCookie />,
-    cookieDough: <img className="icon-img" src={iconAssets.cookieDough} />,
-    bread: <img className="icon-img" src={iconAssets.bread} />,
-    corn: <img className="icon-img" src={iconAssets.corn} />,
-    cornBread: <GiBreadSlice />,
-    birthdaycake: <HiCake />,
-    fish: <img className="icon-img" src={iconAssets.fish} />,
+    "egg": <img className="icon-img" src={iconAssets.egg} />,
+    "flour": <img className="icon-img" src={iconAssets.flour} />,
+    "ash": <img className="icon-img" src={iconAssets.ash} />,
+    "dough": <img className="icon-img" src={iconAssets.dough} />,
+    "batter": <img className="icon-img" src={iconAssets.batter} />,
+    "sugar": <img className="icon-img" src={iconAssets.sugar} />,
+    "cake": <GiStairsCake />,
+    "catfood": <img className="icon-img" src={iconAssets.catfood} />,
+    "butter": <img className="icon-img" src={iconAssets.butter} />,
+    "cookie": <GiCookie />,
+    "cookieDough": <img className="icon-img" src={iconAssets.cookieDough} />,
+    "bread": <img className="icon-img" src={iconAssets.bread} />,
+    "corn": <img className="icon-img" src={iconAssets.corn} />,
+    "cornbread": <GiBreadSlice />,
+    "birthday cake": <HiCake />,
+    "fish": <img className="icon-img" src={iconAssets.fish} />,
   })
 );
 
@@ -65,14 +65,12 @@ export const combineMap = new Map(
     "cat-cat-cat------": "happycoots",
   })
 );
-const ingredients = ["flour", "egg", "sugar", "butter", "corn"];
-const inbetween = ["batter", "dough", "cornDough", "cookieDough"];
-const final = ["cake", "cookie", "bread", "cornBread"];
+let idCount = 1;
 
 export default class Entity {
-  icon = null;
   value = null;
   fresh = true;
+  id = idCount++;
   constructor(value) {
     this.value = value;
   }
@@ -89,7 +87,7 @@ export function EntityIcon({ entity }) {
 
   const icon = iconMap.get(entity.value);
   return <div
-    className={`flex items-center ${entity.fresh ? "fresh" : ""}`}
+    className={`relative flex items-center ${entity.fresh ? "fresh" : ""}`}
   >
     {icon}
   </div>;

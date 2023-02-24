@@ -1,27 +1,33 @@
 import { useState, useRef, useEffect } from "react";
+import { GiOpenPalm } from "react-icons/gi";
 import { EntityIcon } from "../Entity";
+import "./OrderTerminal.css"
 
-export default function Serve({ swapHeldItem, orderList, setOrderList }) {
+export default function Serve({ swapHeldItem, orderList, fulfillOrder }) {
   const [item, setItem] = useState(null);
   useEffect(() => {
     if (!item?.value) return;
     if (!orderList?.length) return;
-    const matchedIdx = orderList.findIndex(x => x.value === item.value);
-    if (matchedIdx === -1) return;
+    const matched = orderList.find(x => x.value === item.value);
+    if (matched == null) return;
     setItem(null);
-    let newList = [...orderList];
-    newList.splice(matchedIdx, 1);
-    setOrderList(newList);
+    fulfillOrder(matched);
+    console.log("serve fulfill")
   }, [item, orderList]);
 
   return (
-    <div>
+    <div className="serve-window">
+      <span className="text-shadow">Serve</span>
       <button
-        className={`cell ovenSquare`}
+        className={`cell ovenSquare relative`}
         onClick={() => setItem(swapHeldItem(item))}
       >
+        <div className="absolute inset-0 text-white opacity-sm pointer-events-none flex items-center justify-center">
+          <GiOpenPalm />
+        </div>
         <EntityIcon entity={item} />
       </button>
+
     </div>
   );
 }

@@ -17,8 +17,8 @@ new Entity("cookie"),
 new Entity("cookieDough"),
 new Entity("bread"),
 new Entity("corn"),
-new Entity("cornBread"),
-new Entity("birthdaycake"),
+new Entity("cornbread"),
+new Entity("birthday cake"),
 new Entity("fish"),
   
   

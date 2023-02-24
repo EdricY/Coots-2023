@@ -25,9 +25,8 @@ export default function Mixer({ swapHeldItem, combineTime, mixTime }) {
     });
     const timeout = setTimeout(() => {
       setMixing(false);
-      const mixStr = `${item1?.value ?? ""}-${item2?.value ?? ""}-${item3?.value ?? ""}-${item4?.value ?? ""}-${
-        item5?.value ?? ""
-      }-${item6?.value ?? ""}-${item7?.value ?? ""}-${item8?.value ?? ""}-${item9?.value ?? ""}`;
+      const mixStr = `${item1?.value ?? ""}-${item2?.value ?? ""}-${item3?.value ?? ""}-${item4?.value ?? ""}-${item5?.value ?? ""
+        }-${item6?.value ?? ""}-${item7?.value ?? ""}-${item8?.value ?? ""}-${item9?.value ?? ""}`;
       console.log(mixStr);
       let mixedVal = mixerMap.get(mixStr);
       if (!mixedVal) mixedVal = "ash";
@@ -57,9 +56,8 @@ export default function Mixer({ swapHeldItem, combineTime, mixTime }) {
     });
     const timeout = setTimeout(() => {
       setCombining(false);
-      const combineStr = `${item1?.value ?? ""}-${item2?.value ?? ""}-${item3?.value ?? ""}-${item4?.value ?? ""}-${
-        item5?.value ?? ""
-      }-${item6?.value ?? ""}-${item7?.value ?? ""}-${item8?.value ?? ""}-${item9?.value ?? ""}`;
+      const combineStr = `${item1?.value ?? ""}-${item2?.value ?? ""}-${item3?.value ?? ""}-${item4?.value ?? ""}-${item5?.value ?? ""
+        }-${item6?.value ?? ""}-${item7?.value ?? ""}-${item8?.value ?? ""}-${item9?.value ?? ""}`;
       console.log(combineStr);
       if (combineStr.includes("ash")) return;
       let combinedVal = combineMap.get(combineStr);
@@ -87,7 +85,7 @@ export default function Mixer({ swapHeldItem, combineTime, mixTime }) {
   const inUse = mixing || combining;
   return (
     <div>
-      Mixer
+      <span className="text-shadow">Mixer</span>
       <div className="mixer-grid">
         <button className={`cell`} disabled={inUse} onClick={() => setItem1(swapHeldItem(item1))}>
           <EntityIcon entity={item1}></EntityIcon>
