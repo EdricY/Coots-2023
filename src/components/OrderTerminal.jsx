@@ -3,9 +3,9 @@ import { EntityIcon } from "../Entity";
 import "./OrderTerminal.css";
 import Serve from "./Serve";
 
-const orderExpireTime = 60 * 1000;
+const orderExpireTime = 120 * 1000;
 
-export default function OrderTerminal({ orderList, removeFromList, swapHeldItem }) {
+export default function OrderTerminal({ orderList, onFulfill, swapHeldItem, onExpire }) {
   const [fulfilledEntity, setFulfilledEntity] = useState(null);
   return (
     <div className="order-queue">
@@ -14,11 +14,10 @@ export default function OrderTerminal({ orderList, removeFromList, swapHeldItem 
           key={x.id}
           entity={x}
           onExpire={(entity) => {
-            console.log("expired!", entity)
-            removeFromList(entity);
+            onExpire(entity);
           }}
           fulfilled={fulfilledEntity?.id === x.id}
-          onFulfillEnd={(entity) => removeFromList(entity)}
+          onFulfillEnd={(entity) => onFulfill(entity)}
         />
       ))}
 

@@ -14,21 +14,29 @@ Object.keys(imgs).forEach(key => {
 });
 
 
+// ca4b42 red
+// c3d4e7 blue
+// f7c7b3 pink
+
 const diceFacesMap = new Map(Object.entries({
   1: {
-    faces: ["sugar", "corn", "egg", "flour", "flour", "flour",],
-    colors: ["#f7c7b3", "#ca4b42", "#c3d4e7", "#f7c7b3", "#ca4b42", "#c3d4e7"],
+    faces: ["egg", "egg", "fish", "flour", "flour", "flour",],
+    colors: ["#ca4b42", "#ca4b42", "#c3d4e7", "#f7c7b3", "#f7c7b3", "#f7c7b3"],
   },
-
+  2: {
+    faces: ["corn", "corn", "corn", "sugar", "sugar", "sugar",],
+    colors: ["#f7c7b3", "#f7c7b3", "#f7c7b3", "#f7c7b3", "#ca4b42", "#c3d4e7"],
+  },
 }))
 
 console.log(diceFacesMap)
-const rollTime = 200;
+const rollTime = 700;
 export default function DiceElement({ diceId, callback }) {
   const ref = useRef();
   const [diceObj, setDiceObj] = useState();
   const [lastRollTime, setLastRollTime] = useState(Date.now());
   const [faces] = useState(diceFacesMap.get(diceId).faces);
+  const [colors] = useState(diceFacesMap.get(diceId).colors);
   useEffect(() => {
     if (!ref.current) return;
 
@@ -40,7 +48,7 @@ export default function DiceElement({ diceId, callback }) {
       const dice = new Dice(
         ref.current,
         faces,
-        diceFacesMap.get(diceId).colors
+        colors,
       );
       dice.roll(0, rollTime, 0.01 + Math.random() / 1000);
       setDiceObj(dice);
@@ -58,7 +66,7 @@ export default function DiceElement({ diceId, callback }) {
 
   const onClick = () => {
     if (!diceObj.isDoneRolling(Date.now())) return;
-    callback?.(faces[diceObj.faceIdx])
+    callback?.(faces[diceObj.faceIdx], colors[diceObj.faceIdx])
     setLastRollTime(Date.now());
     diceObj.roll(Math.floor(Math.random() * 6), rollTime, 0.01 + Math.random() / 1000);
   }

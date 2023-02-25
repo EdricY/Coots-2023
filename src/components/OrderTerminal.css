@@ -18,7 +18,7 @@
   place-items: center;
   position: relative;
 
-  animation: jumpNearEnd 60s linear;
+  animation: jumpNearEnd 120s linear;
   transform-origin: center center;
 }
 
@@ -49,7 +49,7 @@
   stroke-dasharray: 0 252;
   stroke-dashoffset: 62;
   stroke-linecap: round;
-  animation: clockfill 60s ease-out;
+  animation: clockfill 120s ease-out;
 }
 
 @keyframes clockfill {

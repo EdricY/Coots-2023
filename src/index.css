@@ -142,4 +142,8 @@ body {
   background-color: transparent;
   border: none;
   cursor: pointer;
+  border-radius: 9px;
+}
+.transparent-btn:hover {
+  outline: 2px solid var(--darkgray);
 }

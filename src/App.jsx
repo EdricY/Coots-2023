@@ -13,9 +13,9 @@ import Serve from "./components/Serve";
 import Entity, { EntityIcon, iconMap } from "./Entity";
 import Trash from "./Trash";
 import Dice from "./Dice";
-import { gridStartData } from "./data";
+import { gridStartData, levelsData } from "./data";
 import Menu from "./Menu";
-import coots1 from "../assets/coots1.png";
+import coots1 from "./assets/coots1.png";
 
 
 function App() {
@@ -24,6 +24,7 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [gridEntries, setGridEntries] = useState(gridStartData);
   const [level, setLevel] = useState(0);
+  const [numFulfilled, setNumFulfilled] = useState(0)
   const [disabledRow, setDisabledRow] = useState(0);
 
   const holdRef = useRef();
@@ -47,12 +48,13 @@ function App() {
     return heldItem;
   };
   const [angerProgress, setAngerProgress] = useState(0);
-  const addAnger = (amt) => setAngerProgress(x => Math.max(0,Math.min(100, x + amt)));
+  const addAnger = (amt) => setAngerProgress(x => Math.max(0, Math.min(100, x + amt)));
+  // anger loop
   useEffect(() => {
-    if (level < 1) return;
     const t = setInterval(() => {
-      addAnger(2);
+      addAnger(levelsData[level].angerIncrement);
     }, 2000);
+
     return () => {
       clearInterval(t);
     };
@@ -60,8 +62,7 @@ function App() {
 
   const addToGrid = value => {
     const slotIndices = [];
-    console.log(value);
-    for(let i = 0; i< gridEntries.length; i++) {
+    for (let i = 0; i < gridEntries.length; i++) {
       if (gridEntries[i] === null) slotIndices.push(i);
     }
     if (slotIndices.length === 0) return;
@@ -72,35 +73,34 @@ function App() {
     setGridEntries(entriesCopy);
   }
 
-  const orderOptions = [
-    { level: 0, options: ["bread"] },
-    { level: 1, options: ["bread", "cornBread"] },
-    { level: 2, options: ["cake", "bread", "cornBread"] },
-    { level: 3, options: ["cookie", "cake", "bread", "cornBread"] },
-  ];
-  
-    const [orderList, setOrderList] = useState([
-      new Entity(orderOptions[level].options[Math.floor(Math.random() * orderOptions[level].options.length)]),
-      new Entity(orderOptions[level].options[Math.floor(Math.random() * orderOptions[level].options.length)]),
-    ]);
+  const [orderList, setOrderList] = useState([]);
 
+  // customer loop
   useEffect(() => {
-    let orders = 0;
-    let numOfOrders = (level + 2) * 2; // TODO tweak the order numbers
     const t = setInterval(() => {
+      const orders = levelsData[level].orders;
+      const newOrder = new Entity(orders[levelsData[level].currentOrder++]);
       setOrderList((current) => [
         ...current,
-        new Entity(orderOptions[level].options[Math.floor(Math.random() * orderOptions[level].options.length)]),
+        newOrder
       ]);
-      orders++;
-      if (orders >= numOfOrders) {
+      if (levelsData[level].currentOrder === orders.length) {
         clearInterval(t);
+        console.log("end of new customers")
       }
-    }, 15000);
-    return () => {
-      clearInterval(t);
-    };
-  }, []);
+
+    }, levelsData[level].customerInterval);
+
+    return () => clearInterval(t);
+  }, [level])
+
+
+  useEffect(() => {
+    if (numFulfilled === levelsData[level].orders.length) {
+      console.log("level finished!")
+      // set level num?
+    }
+  }, [numFulfilled])
 
   const onAngerFull = () => {
     setAngerProgress(0);
@@ -113,22 +113,6 @@ function App() {
     }
     setGridEntries(copyGrid);
   };
-
-  function addResource(resource) {
-    let copyGrid = [...gridEntries];
-    if (copyGrid.filter((x) => x === null).length == 0) return;
-    let randoslot = 0;
-    //checking if grid is full
-    while (copyGrid[randoslot]) {
-      randoslot = Math.floor(Math.random() * copyGrid.length);
-    }
-
-    if (!copyGrid[randoslot]) {
-      //TODO maybe add new class here?
-      copyGrid[randoslot] = resource;
-      setGridEntries(copyGrid);
-    }
-  }
 
   return (
     <div className="App">
@@ -146,49 +130,60 @@ function App() {
           <span className="text-shadow">Orders</span>
           <OrderTerminal
             orderList={orderList}
-            removeFromList={x => setOrderList(orderList => [...orderList].filter(y => y.id !== x.id))}
             swapHeldItem={swapHeldItem}
+            onExpire={x => {
+              // console.log("expired!", x)
+              addAnger(100);
+              setOrderList(orderList => {
+                const orderListCopy = [...orderList].filter(y => y.id !== x.id);
+                orderListCopy.push(new Entity(x.value));
+                return orderListCopy;
+              });
+            }}
+            onFulfill={x => {
+              setOrderList(orderList => [...orderList].filter(y => y.id !== x.id))
+              setNumFulfilled(f => f + 1);
+            }}
           />
-          
+
         </div>
       </div>
-
-      {/* <div className="resource-getter">
-        <button className="cell" onClick={() => addResource(new Entity("egg"))}>
-          <FaEgg />
-        </button>
-        <button className="cell" onClick={() => addResource(new Entity("flour"))}>
-          <GiFlour />
-        </button>
-        <button className="cell" onClick={() => addResource(new Entity("sugar"))}>
-          <GiPowderBag />
-        </button>
-        <button className="cell" onClick={() => addResource(new Entity("butter"))}>
-          <GiButter />
-        </button>
-        <button className="cell" onClick={() => addResource(new Entity("corn"))}>
-          <GiCorn />
-        </button>
-        <button className="cell" onClick={() => addResource(new Entity("cat"))}>
-          <GiFeline />
-        </button>
-      </div> */}
       <div className="flex">
-
         <Dice
           diceId={"1"}
-          callback={(x) => {
-            addToGrid(x)
+          callback={(face, color) => {
+            addToGrid(face)
             addAnger(1 + Math.random() * 2)
           }}
         />
-        {/* <Dice
-          diceId={"1"}
-          callback={(x) => {
-            console.log(x)
-            addAnger(Math.random() * 20)
+        {level >= 1 && <Dice
+          diceId={"2"}
+          callback={(face, color) => {
+            addToGrid(face)
+            addAnger(1 + Math.random() * 2)
           }}
-        /> */}
+        />}
+        {level >= 2 && <Dice
+          diceId={"2"}
+          callback={(face, color) => {
+            addToGrid(face)
+            addAnger(1 + Math.random() * 2)
+          }}
+        />}
+        {level >= 3 && <Dice
+          diceId={"2"}
+          callback={(face, color) => {
+            addToGrid(face)
+            addAnger(1 + Math.random() * 2)
+          }}
+        />}
+        {level >= 4 && <Dice
+          diceId={"2"}
+          callback={(face, color) => {
+            addToGrid(face)
+            addAnger(1 + Math.random() * 2)
+          }}
+        />}
       </div>
       <div className="tools-container">
         <Trash swapHeldItem={swapHeldItem} trashTime={2000} />
