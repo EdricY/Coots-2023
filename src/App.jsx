@@ -23,7 +23,7 @@ function App() {
   const [recipeOpen, setRecipeOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [gridEntries, setGridEntries] = useState(gridStartData);
-  const [level, setLevel] = useState(3);
+  const [level, setLevel] = useState(0);
   const [numFulfilled, setNumFulfilled] = useState(0)
   const [disabledRow, setDisabledRow] = useState(0);
 
