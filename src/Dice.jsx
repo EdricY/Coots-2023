@@ -14,26 +14,26 @@ Object.keys(imgs).forEach(key => {
 });
 
 
-// ca4b42 red
+// f1dd7e yellow
 // c3d4e7 blue
 // f7c7b3 pink
 
 const diceFacesMap = new Map(Object.entries({
   1: {
     faces: ["egg", "egg", "flour", "flour", "flour", "flour",],
-    colors: ["#ca4b42", "#ca4b42", "#c3d4e7", "#f7c7b3", "#f7c7b3", "#f7c7b3"],
+    colors: ["#f1dd7e", "#f1dd7e", "#c3d4e7", "#c3d4e7", "#f7c7b3", "#f7c7b3"],
   },
   2: {
     faces: ["corn", "corn", "corn", "fish", "fish", "fish",],
-    colors: ["#f7c7b3", "#f7c7b3", "#f7c7b3", "#ca4b42", "#ca4b42", "#ca4b42"],
+    colors: ["#f7c7b3", "#f7c7b3", "#c3d4e7", "#c3d4e7", "#f1dd7e", "#f1dd7e"],
   },
   3: {
     faces: ["sugar", "egg", "sugar", "sugar", "flour", "fish",],
-    colors: ["#f7c7b3", "#f7c7b3", "#f7c7b3", "#ca4b42", "#ca4b42", "#ca4b42"],
+    colors: ["#f7c7b3", "#f7c7b3", "#c3d4e7", "#c3d4e7", "#f1dd7e", "#f1dd7e"],
   },
   4: {
     faces: ["sugar", "butter", "sugar", "butter", "flour", "fish",],
-    colors: ["#f7c7b3", "#f7c7b3", "#f7c7b3", "#ca4b42", "#ca4b42", "#ca4b42"],
+    colors: ["#f7c7b3", "#f7c7b3", "#c3d4e7", "#c3d4e7", "#f1dd7e", "#f1dd7e"],
   },
 }))
 

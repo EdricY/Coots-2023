@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { GiSpellBook } from "react-icons/gi";
+import { bgSong } from "./assets/sounds";
 
 export default function Menu({ isOpen, setClosed, level }) {
   const ref = useRef();
@@ -11,6 +12,8 @@ export default function Menu({ isOpen, setClosed, level }) {
   }, [isOpen]);
 
   const closeAction = () => {
+    bgSong.loop = true;
+    bgSong.play();
     setClosed();
     ref.current.close();
     document.activeElement?.blur();

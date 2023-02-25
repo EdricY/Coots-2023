@@ -30,7 +30,7 @@ export default function Recipe({ isOpen, setClosed, level }) {
           <FaTimes />
         </button>
         <div>
-          <p>Magical Mogul's Cutie Baking Book</p>
+          <p className="text-center bold">Magical Mogul's Cutie Baking Book</p>
           <p>
             When I think about cooking I think about life and how much there is to do and learn. Looking at a
             kitchen is like looking at a canvas, so you must make sure that your canvas is clean before you start
