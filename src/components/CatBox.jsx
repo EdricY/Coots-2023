@@ -1,6 +1,7 @@
 import "./Oven.css";
 import { useState, useEffect, useRef } from "react";
 import Entity, { bakeMap, EntityIcon, iconMap } from "../Entity";
+import { purrSound } from "../assets/sounds";
 
 
 
@@ -9,6 +10,8 @@ export default function CatBox({ swapHeldItem, callback }) {
   useEffect(() => {
     if (item?.value === "catfood") {
       setItem(null);
+      purrSound.currentTime = 0;
+      purrSound.play();
       callback()
     }
   }, [item]);

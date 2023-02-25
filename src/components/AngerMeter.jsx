@@ -5,6 +5,7 @@ import catface2 from "../assets/catface2.png";
 import catface3 from "../assets/catface3.png";
 import catface4 from "../assets/catface4.png";
 import "./AngerMeter.css";
+import { meowSound, rageSound } from "../assets/sounds";
 
 export default function AngerMeter({ progress, onFilled }) {
   const cutInRef = useRef();
@@ -12,10 +13,14 @@ export default function AngerMeter({ progress, onFilled }) {
 
   useEffect(() => {
     if (progress >= 100) {
+      meowSound.currentTime = 0;
+      meowSound.play();
       setShowCutIn(true)
       const t = setTimeout(() => {
         setShowCutIn(false)
         onFilled()
+        rageSound.currentTime = 0;
+        rageSound.play()
       }, 2000)
       return () => clearInterval(t);
     }

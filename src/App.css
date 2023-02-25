@@ -65,6 +65,9 @@
   border: none;
   background: inherit;
   cursor: pointer;
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
 }
 
 .ordersection {

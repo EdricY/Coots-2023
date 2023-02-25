@@ -20,12 +20,20 @@ Object.keys(imgs).forEach(key => {
 
 const diceFacesMap = new Map(Object.entries({
   1: {
-    faces: ["egg", "egg", "fish", "flour", "flour", "flour",],
+    faces: ["egg", "egg", "flour", "flour", "flour", "flour",],
     colors: ["#ca4b42", "#ca4b42", "#c3d4e7", "#f7c7b3", "#f7c7b3", "#f7c7b3"],
   },
   2: {
-    faces: ["corn", "corn", "corn", "sugar", "sugar", "sugar",],
-    colors: ["#f7c7b3", "#f7c7b3", "#f7c7b3", "#f7c7b3", "#ca4b42", "#c3d4e7"],
+    faces: ["corn", "corn", "corn", "fish", "fish", "fish",],
+    colors: ["#f7c7b3", "#f7c7b3", "#f7c7b3", "#ca4b42", "#ca4b42", "#ca4b42"],
+  },
+  3: {
+    faces: ["sugar", "egg", "sugar", "sugar", "flour", "fish",],
+    colors: ["#f7c7b3", "#f7c7b3", "#f7c7b3", "#ca4b42", "#ca4b42", "#ca4b42"],
+  },
+  4: {
+    faces: ["sugar", "butter", "sugar", "butter", "flour", "fish",],
+    colors: ["#f7c7b3", "#f7c7b3", "#f7c7b3", "#ca4b42", "#ca4b42", "#ca4b42"],
   },
 }))
 

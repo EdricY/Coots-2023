@@ -24,28 +24,66 @@ export default function Menu({ isOpen, setClosed, level }) {
         </button>
         {level == 0 && (
           <>
-            <h2>Welcome to Coots in the Kitchen!</h2>
-            <div>
-              1. <strong>Roll</strong> for resources
-            </div>
-            <div>
-              2. Check the <strong>recipe book</strong> for how to craft your resources into food{" "}
-              <span style={{ fontSize: "25px" }}>
-                <GiSpellBook />
-              </span>
-            </div>
-            <div>
-              3. Use the <strong>oven</strong> to cook your food
-            </div>
-            <div>
-              4. <strong>Serve</strong> customers in the order they come in
-            </div>
+            <h2>Welcome to Kittychen Scramble!</h2>
+            <p>
+              1. <strong>Roll</strong> for resources.
+            </p>
+            <p>
+              2. <strong>Learn</strong> to bake from the recipe book.
+            </p>
+            <p>
+              3. <strong>Bake</strong> using your appliances.
+            </p>
+            <p>
+              4. <strong>Serve</strong> the orders as they come in.
+            </p>
+            <p>
+              Beware of angry cats.
+            </p>
           </>
         )}
-        {level >= 1 && (
+        {level == 1 && (
           <>
-            <div>Wow you made it!</div>
-            <div>Should we give you an upgrade or something???</div>
+            <div className="text-center bold">Wasn&apos;t that easy?</div>
+            <div>Your customers might want more than just bread.</div>
+            <div>Maybe the cat needs some love...</div>
+            <div className="text-center italic">Your recipe book has been updated.</div>
+          </>
+        )}
+        {level == 2 && (
+          <>
+            <div className="text-center bold">Nice work!</div>
+            <div>Maybe some sweets this time?</div>
+            <div>That cat of yours is really getting out of hand.</div>
+            <div className="text-center italic">Your recipe book has been updated again.</div>
+          </>
+        )}
+        {level == 3 && (
+          <>
+            <div className="text-center bold">Amazing job!</div>
+            <div>Too many customers yet?</div>
+            <div>Better get back to it.</div>
+            <div className="text-center italic">Your recipe book has been updated again.</div>
+          </>
+        )}
+        {level == 4 && (
+          <>
+            <div className="text-center bold">Wow!</div>
+            <div>Can you handle more?</div>
+          </>
+        )}
+        {level == 5 && (
+          <>
+            <div className="text-center bold">That&apos;s all folks!</div>
+            <div>That's all the game we have for now.</div>
+            <div>Made for Ludwig Jam 2023</div>
+            <div>Made by Edric Yu and Imani Muya</div>
+            <div>Special thanks to Jacob Bernard</div>
+            <div>Check the description for other credits.</div>
+            <div><br/></div>
+            <div>see ya later</div>
+            <div>bye now</div>
+            <div>get outta here</div>
           </>
         )}
       </div>

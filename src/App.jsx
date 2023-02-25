@@ -23,7 +23,7 @@ function App() {
   const [recipeOpen, setRecipeOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [gridEntries, setGridEntries] = useState(gridStartData);
-  const [level, setLevel] = useState(0);
+  const [level, setLevel] = useState(3);
   const [numFulfilled, setNumFulfilled] = useState(0)
   const [disabledRow, setDisabledRow] = useState(0);
 
@@ -49,7 +49,9 @@ function App() {
   };
   const [angerProgress, setAngerProgress] = useState(0);
   const addAnger = (amt) => setAngerProgress(x => Math.max(0, Math.min(100, x + amt)));
+
   // anger loop
+
   useEffect(() => {
     const t = setInterval(() => {
       addAnger(levelsData[level].angerIncrement);
@@ -96,19 +98,27 @@ function App() {
 
 
   useEffect(() => {
+    console.log(numFulfilled, levelsData[level].orders.length)
     if (numFulfilled === levelsData[level].orders.length) {
       console.log("level finished!")
+      setLevel(level => level + 1);
       // set level num?
     }
-  }, [numFulfilled])
+  }, [numFulfilled]);
+
+  useEffect(() => {
+    setMenuOpen(true);
+    setNumFulfilled(0);
+    setAngerProgress(0);
+  }, [level])
 
   const onAngerFull = () => {
     setAngerProgress(0);
     const r = Math.floor(Math.random() * 3)
     setDisabledRow(r + 1)
-    let start = r * 8;
+    let start = r * 6;
     let copyGrid = [...gridEntries];
-    for (let idx = 0; idx < 8; idx++) {
+    for (let idx = 0; idx < 6; idx++) {
       copyGrid[start + idx] = null;
     }
     setGridEntries(copyGrid);
@@ -133,7 +143,7 @@ function App() {
             swapHeldItem={swapHeldItem}
             onExpire={x => {
               // console.log("expired!", x)
-              addAnger(100);
+              addAnger(45);
               setOrderList(orderList => {
                 const orderListCopy = [...orderList].filter(y => y.id !== x.id);
                 orderListCopy.push(new Entity(x.value));
@@ -164,21 +174,14 @@ function App() {
           }}
         />}
         {level >= 2 && <Dice
-          diceId={"2"}
+          diceId={"3"}
           callback={(face, color) => {
             addToGrid(face)
             addAnger(1 + Math.random() * 2)
           }}
         />}
         {level >= 3 && <Dice
-          diceId={"2"}
-          callback={(face, color) => {
-            addToGrid(face)
-            addAnger(1 + Math.random() * 2)
-          }}
-        />}
-        {level >= 4 && <Dice
-          diceId={"2"}
+          diceId={"4"}
           callback={(face, color) => {
             addToGrid(face)
             addAnger(1 + Math.random() * 2)
@@ -197,7 +200,7 @@ function App() {
         disabledRow={disabledRow}
         clearDisabledRow={() => setDisabledRow(0)}
       />
-      <CatBox swapHeldItem={swapHeldItem} callback={() => addAnger(-20)} />
+      <CatBox swapHeldItem={swapHeldItem} callback={() => addAnger(-40)} />
       <AngerMeter progress={angerProgress} onFilled={onAngerFull} />
 
       <div className={`hold-container ${!heldItem?.value ? "hide" : ""}`} ref={holdRef}>
@@ -208,7 +211,7 @@ function App() {
           </>
         )}
       </div>
-      <Recipe isOpen={recipeOpen} setClosed={() => setRecipeOpen(false)} />
+      <Recipe isOpen={recipeOpen} setClosed={() => setRecipeOpen(false)} level={level}/>
       <div className="hide">
         {[...iconMap.entries()].map(([key, icon]) => (<Fragment key={key}>
 

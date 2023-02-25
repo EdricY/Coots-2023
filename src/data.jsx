@@ -20,13 +20,7 @@ export const gridStartData = [
   null,
   new Entity("flour"),
   null,
-  null,
-  null,
-  new Entity("fish"),
-  new Entity("fish"),
-  null,
-  null,
-  null,
+  new Entity("bread"),
   null,
 ];
 
@@ -40,20 +34,33 @@ export const levelsData = [
   },
   {
     currentOrder: 0,
-    orders: ["cornbread", "cornbread", "bread", "cornbread", "cornbread", "bread",],
+    orders: ["bread", "cornbread", "bread", "cornbread", "cornbread", "bread"],
     customerInterval: 20000,
-    angerIncrement: 2,
+    angerIncrement: 1,
   },
   {
     currentOrder: 0,
-    orders: ["cornbread", "cornbread", "bread", "cornbread", "cornbread", "bread",],
+    orders: ["cornbread", "bread", "cake", "cornbread", "cake", "bread",],
     customerInterval: 20000,
     angerIncrement: 3,
   },
   {
     currentOrder: 0,
-    orders: ["cornbread", "cornbread", "bread", "cornbread", "cornbread", "bread",],
+    orders: ["bread", "cake", "cookie", "cookie",],
     customerInterval: 20000,
     angerIncrement: 4,
+  },
+  {
+    currentOrder: 0,
+    orders: ["bread", "cornbread", "cookie", "cornbread", "bread", "cornbread", "cake", "cookie", "bread"],
+    customerInterval: 20000,
+    angerIncrement: 4,
+  },
+  {
+    // unused level
+    currentOrder: 0,
+    orders: ["bread", "bread", "bread"],
+    customerInterval: 200000000,
+    angerIncrement: 20,
   },
 ];

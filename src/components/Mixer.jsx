@@ -61,7 +61,6 @@ export default function Mixer({ swapHeldItem, combineTime, mixTime }) {
       console.log(combineStr);
       if (combineStr.includes("ash")) return;
       let combinedVal = combineMap.get(combineStr);
-      if (combinedVal == "happycoots") console.log("coots is pleased"); //TODO decrese coots meter
       if (!combinedVal) {
         return;
       }
@@ -120,9 +119,9 @@ export default function Mixer({ swapHeldItem, combineTime, mixTime }) {
         <button className="action-btn mr-1" onClick={() => setMixing(!mixing)}>
           {mixing ? "Stop" : "Mix"}
         </button>
-        <button className="action-btn" onClick={() => setCombining(!combining)}>
+        {/* <button className="action-btn" onClick={() => setCombining(!combining)}>
           {combining ? "Stop" : "Combine"}
-        </button>
+        </button> */}
       </div>
     </div>
   );

@@ -13,7 +13,7 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --grid-cols: 8;
+  --grid-cols: 6;
 
   --red: #ca4b42;
   --yellow: #f1dd7e;
@@ -43,6 +43,12 @@
   --step-3: clamp(1.62rem, calc(0.53rem + 5.44vmin), 4.88rem);
   --step-4: clamp(1.94rem, calc(0.56rem + 6.93vmin), 6.1rem);
   --step-5: clamp(2.33rem, calc(0.57rem + 8.83vmin), 7.63rem);
+}
+
+img {
+  user-select: none;
+  user-drag: none;
+  pointer-events: none;
 }
 
 *,
@@ -113,6 +119,10 @@ body {
   display: flex;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .items-center {
   align-items: center;
 }
@@ -136,6 +146,13 @@ body {
 
 .hide {
   display: none;
+}
+
+.bold {
+  font-weight: bold;
+}
+.italic {
+  font-style: italic;
 }
 
 .transparent-btn {

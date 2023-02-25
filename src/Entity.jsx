@@ -29,7 +29,7 @@ export const iconMap = new Map(
     "catfood": <img className="icon-img" src={iconAssets.catfood} />,
     "butter": <img className="icon-img" src={iconAssets.butter} />,
     "cookie": <GiCookie />,
-    "cookieDough": <img className="icon-img" src={iconAssets.cookieDough} />,
+    "cookie dough": <img className="icon-img" src={iconAssets.cookieDough} />,
     "bread": <img className="icon-img" src={iconAssets.bread} />,
     "corn": <img className="icon-img" src={iconAssets.corn} />,
     "cornbread": <GiBreadSlice />,
@@ -41,20 +41,46 @@ export const iconMap = new Map(
 export const bakeMap = new Map(
   Object.entries({
     batter: "cake",
-    cookieDough: "cookie",
+    "cookie dough": "cookie",
     dough: "bread",
   })
 );
 
 export const mixerMap = new Map(
   Object.entries({
-    "egg-egg-egg-flour-flour-flour-flour-flour-flour": "dough",
-    "flour-flour-flour-egg-egg-egg-flour-flour-flour": "dough",
-    "flour-flour-flour-flour-flour-flour-egg-egg-egg": "dough",
-    "flour-flour-flour-egg-egg-egg-sugar-sugar-sugar": "batter",
-    "sugar-sugar-sugar-egg-egg-egg-flour-flour-flour": "batter",
-    "butter-butter-butter-sugar-sugar-sugar-egg-egg-egg": "batter",
-    "batter-batter-batter-flour-flour-flour-flour-flour-flour": "cookieDough",
+    "-egg---egg--flour-flour-flour": "dough",
+    "egg--flour----flour--egg": "dough",
+    "flour--egg----egg--flour": "dough",
+    "egg--egg----egg--flour": "dough",
+    "egg--egg----flour--egg": "dough",
+    "egg--flour----egg--egg": "dough",
+    "flour--egg----egg--egg": "dough",
+    "flour--flour----flour--egg": "dough",
+    "flour--flour----egg--flour": "dough",
+    "flour--egg----flour--flour": "dough",
+    "egg--flour----flour--flour": "dough",
+
+    "-----corn---bread": "cornbread",
+    "----corn---bread-": "cornbread",
+    "---corn---bread--": "cornbread",
+    "--corn---bread---": "cornbread",
+    "-corn---bread----": "cornbread",
+    "corn---bread-----": "cornbread",
+
+    "fish---fish---fish--": "catfood",
+    "-fish---fish---fish-": "catfood",
+    "--fish---fish---fish": "catfood",
+    "fish-fish-fish------": "catfood",
+    "---fish-fish-fish---": "catfood",
+    "------fish-fish-fish": "catfood",
+    
+
+    "flour-flour-flour-egg-egg--sugar-sugar-sugar": "batter",
+    "flour-flour-flour--egg-egg-sugar-sugar-sugar": "batter",
+
+    "sugar-sugar-butter-sugar-batter-egg-sugar-sugar-egg": "cookie dough",
+    "sugar-sugar-egg-sugar-batter-butter-sugar-sugar-egg": "cookie dough",
+    "sugar-sugar-egg-sugar-batter-egg-sugar-sugar-butter": "cookie dough",
   })
 );
 

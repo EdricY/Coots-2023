@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { dingSound } from "../assets/sounds";
 import { EntityIcon } from "../Entity";
 import "./OrderTerminal.css";
 import Serve from "./Serve";
@@ -43,6 +44,8 @@ function OrderSquare({ entity, onExpire, fulfilled, onFulfillEnd }) {
 
   useEffect(() => {
     if (fulfilled) {
+      dingSound.currentTime = 0;
+      dingSound.play();
       setTimeout(() => {
         console.log("fultilled", entity)
         onFulfillEnd(entity);
