@@ -15,6 +15,8 @@ import Trash from "./Trash";
 import Dice from "./Dice";
 import { gridStartData } from "./data";
 import Menu from "./Menu";
+import coots1 from "../assets/coots1.png";
+
 
 function App() {
   const [heldItem, setHeldItem] = useState(null);
@@ -218,6 +220,7 @@ function App() {
           {{ ...icon, props: { id: key, ...icon.props, key } }}
         </Fragment>
         ))}
+        <img src={coots1} />
       </div>
     </div>
   );
